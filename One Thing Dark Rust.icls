@@ -1,0 +1,639 @@
+<scheme name="One Thing Dark Rust" version="142" parent_scheme="One Thing Dark">
+  <metaInfo>
+    <property name="created">2026-09-13T13:45:00</property>
+    <property name="ide">idea</property>
+    <property name="originalScheme">One Thing Dark</property>
+  </metaInfo>
+  <attributes>
+    <option name="CPP_NAMESPACE">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="OC.BADCHARACTER">
+      <value>
+        <option name="FOREGROUND" value="f38ba8" />
+      </value>
+    </option>
+    <option name="OC.BLOCK_COMMENT">
+      <value>
+        <option name="FOREGROUND" value="595959" />
+      </value>
+    </option>
+    <option name="OC.BRACES">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="OC.BRACKETS">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="OC.COMMA">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="OC.CPP_KEYWORD">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="OC.DIRECTIVE">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="OC.DOT">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="OC.ENUM_CONST">
+      <value>
+        <option name="FOREGROUND" value="ffffff" />
+      </value>
+    </option>
+    <option name="OC.EXTERN_VARIABLE">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="OC.FUNCTION">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="OC.FUNCTION_DECLARATION">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="OC.GLOBAL_VARIABLE">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="OC.IVAR">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="OC.KEYWORD">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="OC.LINE_COMMENT">
+      <value>
+        <option name="FOREGROUND" value="595959" />
+      </value>
+    </option>
+    <option name="OC.LOCAL_VARIABLE">
+      <value>
+        <option name="FOREGROUND" value="dedede" />
+      </value>
+    </option>
+    <option name="OC.MACRONAME">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="OC.MACRO_PARAMETER">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="OC.MESSAGE_ARGUMENT">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="OC.METHOD_DECLARATION">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="OC.NUMBER">
+      <value>
+        <option name="FOREGROUND" value="ffffff" />
+      </value>
+    </option>
+    <option name="OC.OPERATION_SIGN">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="OC.OVERLOADED_OPERATOR">
+      <value>
+        <option name="FOREGROUND" value="858585" />
+      </value>
+    </option>
+    <option name="OC.PARAMETER">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="OC.PARENTHS">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="OC.PROPERTY">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="OC.SELFSUPERTHIS">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="OC.SEMICOLON">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="OC.STRING">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="OC.STRUCT_FIELD">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="OC.STRUCT_LIKE">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="OC.TYPEDEF">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_BLOCK_COMMENT">
+      <value>
+        <option name="FOREGROUND" value="595959" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_BUILTIN_TYPE_KEYWORD">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_CHARACTER_LITERAL">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_CLASS_FIELD_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_CLASS_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_CONCEPT_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_CONSTANT_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="ffffff" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_CONTROL_FLOW_KEYWORD">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_CONTROL_TRANSFER_KEYWORD">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_DEDUCTION_GUIDE_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_DEPENDENT_NAME_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_DIRECTIVE">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_DOXYGEN_COMMAND">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_DOXYGEN_COMMAND_VALUE">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_DOXYGEN_COMMENT">
+      <value>
+        <option name="FOREGROUND" value="595959" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_ENUM_ENUMERATOR_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="ffffff" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_ENUM_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_FLOAT_LITERAL">
+      <value>
+        <option name="FOREGROUND" value="ffffff" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_GLOBAL_FUNCTION_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_GLOBAL_FUNCTION_USAGE_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_GLOBAL_VARIABLE_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_INTEGER_LITERAL">
+      <value>
+        <option name="FOREGROUND" value="ffffff" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_KEYWORD">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_LINE_COMMENT">
+      <value>
+        <option name="FOREGROUND" value="595959" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_LOCAL_VARIABLE_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="dedede" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_MEMBER_FUNCTION_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_MEMBER_FUNCTION_USAGE_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_NAMESPACE_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_NON_TYPE_TEMPLATE_PARAMETER_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_OVERLOADED_OPERATOR_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_PARAMETER_VARIABLE_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_PREPROCESSOR_MACRO_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_PREPROCESSOR_MACRO_PARAMETER_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_RAW_STRING_LITERAL">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_STATIC_FIELD_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_STATIC_MEMBER_FUNCTION_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_STATIC_MEMBER_FUNCTION_USAGE_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_STRING_LITERAL">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_STRUCT_FIELD_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_STRUCT_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_TEMPLATE_PARAMETER_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_THIS_KEYWORD">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_TYPEDEF_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_UE4_REFLECTION_SPECIFIER_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_UNION_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="ReSharper.CPP_UNION_MEMBER_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="STARLARK_BRACKETS">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="STARLARK_COMMA">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="STARLARK_COMMENT">
+      <value>
+        <option name="FOREGROUND" value="707070" />
+      </value>
+    </option>
+    <option name="STARLARK_DOT">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="STARLARK_FUNCTION_DECLARATION">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="STARLARK_IDENTIFIER">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="STARLARK_KEYWORD">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="STARLARK_NAMED_ARGUMENT">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="STARLARK_NUMBER">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="STARLARK_PARENTHESES">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="STARLARK_SEMICOLON">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="STARLARK_STRING">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="com.jetbrains.cmake.ARGUMENT_KEYWORD">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="com.jetbrains.cmake.ARGUMENT_LITERAL">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="com.jetbrains.cmake.ARGUMENT_LITERAL_CMAKE">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="com.jetbrains.cmake.ARGUMENT_PROPERTY">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="com.jetbrains.cmake.ARGUMENT_PROPERTY_CMAKE">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="com.jetbrains.cmake.BRACKETS">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="com.jetbrains.cmake.COMMAND">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="com.jetbrains.cmake.INVALID_STRING_ESCAPE">
+      <value>
+        <option name="FOREGROUND" value="f38ba8" />
+      </value>
+    </option>
+    <option name="com.jetbrains.cmake.KEYWORD">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="com.jetbrains.cmake.LINE_COMMENT">
+      <value>
+        <option name="FOREGROUND" value="595959" />
+      </value>
+    </option>
+    <option name="com.jetbrains.cmake.NUMERIC_TEXT">
+      <value>
+        <option name="FOREGROUND" value="ffffff" />
+      </value>
+    </option>
+    <option name="com.jetbrains.cmake.PARENTHESES">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="com.jetbrains.cmake.SEMICOLON">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="com.jetbrains.cmake.STRING_TEXT">
+      <value>
+        <option name="FOREGROUND" value="737373" />
+      </value>
+    </option>
+    <option name="com.jetbrains.cmake.VALID_STRING_ESCAPE">
+      <value>
+        <option name="FOREGROUND" value="9a9a9a" />
+      </value>
+    </option>
+    <option name="org.rust.ASSOC_FUNCTION">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="org.rust.ASSOC_FUNCTION_CALL">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="org.rust.ASSOC_TRAIT_FUNCTION">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="org.rust.ASSOC_TRAIT_FUNCTION_CALL">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="org.rust.CFG_DISABLED_CODE">
+      <value>
+        <option name="FOREGROUND" value="707070" />
+      </value>
+    </option>
+    <option name="org.rust.CONSTANT">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="org.rust.CRATE">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="org.rust.FUNCTION_CALL">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="org.rust.LIFETIME">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="org.rust.METHOD_CALL">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="org.rust.MUT_SELF_PARAMETER">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="org.rust.MUT_STATIC">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="org.rust.Q_OPERATOR">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="org.rust.SELF_EXPRESSION">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="org.rust.SELF_PARAMETER">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="org.rust.STATIC">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="org.rust.TRAIT_METHOD">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+    <option name="org.rust.TRAIT_METHOD_CALL">
+      <value>
+        <option name="FOREGROUND" value="b0b0b0" />
+      </value>
+    </option>
+    <option name="org.rust.TYPE_ALIAS">
+      <value>
+        <option name="FOREGROUND" value="e6e6e6" />
+      </value>
+    </option>
+  </attributes>
+</scheme>
