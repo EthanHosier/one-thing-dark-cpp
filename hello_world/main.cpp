@@ -220,13 +220,59 @@ T max(T x, U y) {
 }
 
 template <typename T>
-T addOne(T x) {
-    return x + 1;
+T addOne(T x, int n = 1) {
+    return x + n;
 }
 
-std::string addOne(std::string x) {
-    return x + "!";
+template<>
+std::string addOne(std::string x, int n) {
+    return x + "!" + static_cast<char>(n);
 }
+
+template<>
+bool addOne(bool x, int n) = delete;
+
+template<typename T, typename U>
+T add(T x, U y) {
+    return x + y;
+}
+
+auto max2(auto t1, auto t2) {
+    return (t1 > t2) ? t1 : t2;
+}
+
+template <int N>
+void print_times() {
+    for (int i = 0; i < N; i++) {
+        std::cout << "Hello " << N << '\n';
+    }
+}
+
+template <int I>
+double getSqrt()
+{
+    static_assert(I >= 0.0, "getSqrt(): I must be non-negative");
+
+    if constexpr (I >= 0)
+        return std::sqrt(I);
+
+    return 0.0;
+}
+
+template <typename T>
+constexpr bool is_lvalue(T&)
+{
+    return true;
+}
+
+// T&& is an rvalue reference, so this overload will be preferred for rvalues
+template <typename T>
+constexpr bool is_lvalue(T&&)
+{
+    return false;
+}
+
+void func4();
 
 void func3() {
     int x;
@@ -246,5 +292,105 @@ void func3() {
     //
     // max(a, b);
 
-    std::cout << addOne(std::string("hello")) << '\n';
+    std::cout << addOne<std::string>(std::string("hello"), 98) << '\n';
+    // std::cout << addOne(false) << '\n';
+    std::cout << add<float, float>(1,1.5) << '\n';
+    std::cout << max<float>(1,1.5) << '\n';
+
+    print_times<2>();
+    print_times<3>();
+
+    std::cout <<  getSqrt<1>() << '\n';
+    std::cout <<  getSqrt<2L>() << '\n';
+    // std::cout <<  getSqrt<-1>() << '\n';
+
+    std::cout <<  is_lvalue(x) << '\n';
+    std::cout <<  is_lvalue(x + 1) << '\n';
+
+    func4();
+}
+
+void printValue(const std::string& y) // type changed to std::string&
+{
+    std::cout << y << '\n';
+}
+
+void addOnee(int& out) {
+    ++out;
+}
+
+void printByAddr(const int* ptr) {
+    std::cout << *ptr << '\n';
+}
+
+void incrAddress(const int*& ptr) {
+    ++ptr;
+}
+
+void func4() {
+    int x {5};
+    int& ref {x};
+
+    std::cout << x << '\n';
+    std::cout << ref << '\n';
+
+    x += 1;
+
+    std::cout << x << '\n';
+    std::cout << ref << '\n';
+
+    const int& y {x};
+    ref += 1;
+
+    std::cout << x << '\n';
+    std::cout << ref << '\n';
+    std::cout << y << '\n';
+
+    char c { 'a' };
+    const int& r2 { c };
+    std::cout << r2 << '\n';
+    std::cout << c << '\n';
+    c = 'b';
+    std::cout << r2 << '\n';
+    std::cout << c << '\n';
+
+    std::string s {"hello"};
+    printValue(s);
+
+    int xx {1};
+    std::cout << xx << '\n';
+    addOnee(xx);
+    std::cout << xx << '\n';
+    //
+    // const int yy {1};
+    // addOnee(yy);
+    // std::cout<<yy<<'\n';
+
+    printValue("hello");
+    const std::string ss {"hey"};
+    printValue(ss);
+
+    const int& a {5};
+    // int& a {5};
+
+    int* ptr{};
+    int temp {5};
+    std::cout << ptr << '\n';
+    ptr = &temp;
+    std::cout << ptr << '\n';
+
+    int* ptr2{reinterpret_cast<int *>(temp)};
+    std::cout << ptr2 << '\n';
+
+    const int* ptrr { &x };
+    ptrr+=1;
+
+    // const double d {5};
+    // const double* d_ptr {&d};
+    // printByAddr(d_ptr);
+
+    std::cout << ptrr << '\n';
+    incrAddress(ptrr);
+    std::cout << ptrr << '\n';
+
 }
