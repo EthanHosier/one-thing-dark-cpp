@@ -627,5 +627,7 @@ void func6() {
     std::cout << Employeee<int>::EmployeeeNationality::English << '\n';
     Employeee<std::string_view> e1 = Employeee("huh"sv, "Hello"sv);
 
+    std::cout << e << '\n';
+
 }
 

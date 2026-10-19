@@ -23,6 +23,15 @@ public:
     ~Employeee();
     const std::string& getName() const;
     void print_name() const;
+
+    template<typename U>
+    friend std::ostream& operator<<(std::ostream& os, const Employeee<U>& acc);
 };
+
+template<typename T>
+std::ostream& operator<<(std::ostream& os, const Employeee<T>& acc) {
+    return os << acc.m_name << ';' << acc.something_;
+};
+
 
 #endif //HELLO_WORLD_EMPLOYEE_H
