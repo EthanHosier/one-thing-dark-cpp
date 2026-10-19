@@ -20,8 +20,13 @@ Employeee<T>::~Employeee() {
 }
 
 template<typename T>
-const std::string& Employeee<T>::getName() const {
+const std::string& Employeee<T>::getName() const & {
     return m_name;
+}
+
+template<typename T>
+std::string Employeee<T>::getName() const && {
+    return m_name + '!';
 }
 
 template<typename T>

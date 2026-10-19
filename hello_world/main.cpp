@@ -628,6 +628,8 @@ void func6() {
     Employeee<std::string_view> e1 = Employeee("huh"sv, "Hello"sv);
 
     std::cout << e << '\n';
+    std::cout << e.getName() << '\n';
+    std::cout << Employeee{e}.getName() << '\n';
 
 }
 

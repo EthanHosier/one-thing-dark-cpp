@@ -21,7 +21,8 @@ public:
 
     explicit Employeee(const T& something_, std::string_view name);
     ~Employeee();
-    const std::string& getName() const;
+    const std::string& getName() const &;
+    std::string getName() const &&;
     void print_name() const;
 
     template<typename U>
