@@ -33,7 +33,9 @@ int idkkk() {
     return -1;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+    std::cout << argc << '\n';
+    std::cout << argv[argc - 1] << '\n';
     const auto lang = "C++";
     std::cout << "Hello and welcome to " << lang << "!\n";
 
@@ -478,6 +480,8 @@ void print(const Coord<T> &c) {
 
 void func6();
 
+void func7();
+
 void func5() {
     Color apple{Red};
     Color shirt{Green};
@@ -515,6 +519,7 @@ void func5() {
     print(c1);
 
     func6();
+    func7();
 }
 
 class Date {
@@ -527,7 +532,7 @@ public:
         std::cout << "Constructed (" << day_ << '/' << month_ << '/' << year_ << ')' << '\n';
     };
 
-    Date(const Date& date) : day_{date.day_}, month_{date.month_}, year_{date.year_} {
+    Date(const Date &date) : day_{date.day_}, month_{date.month_}, year_{date.year_} {
         std::cout << "Copied!" << '\n';
     }
 
@@ -563,32 +568,30 @@ void doSomethingCopied(Date d) {
     d.printDate();
 }
 
-Date unitCopy(const Date& d) {
+Date unitCopy(const Date &d) {
     return d;
 }
 
-class IntPair
-{
+class IntPair {
 private:
     int m_x{};
     int m_y{};
 
 public:
     IntPair(int x, int y)
-        : m_x { x }, m_y { y }
-    {}
+        : m_x{x}, m_y{y} {
+    }
 
     [[nodiscard]] int x() const { return m_x; }
-    [[nodiscard]] int y() const{ return m_y; }
+    [[nodiscard]] int y() const { return m_y; }
 };
 
-void print(IntPair p)
-{
+void print(IntPair p) {
     std::cout << "(" << p.x() << ", " << p.y() << ")\n";
 }
 
 template<typename T>
-void printEmployeee(Employeee<T>& e) // has an Employee parameter
+void printEmployeee(Employeee<T> &e) // has an Employee parameter
 {
     std::cout << e.getName() << '\n';
 }
@@ -604,10 +607,10 @@ void func6() {
     doSomething(date);
     date.printTotalAdded();
 
-    Date date3 {3};
+    Date date3{3};
 
-    print(IntPair { 1,2});
-    print({1,2});
+    print(IntPair{1, 2});
+    print({1, 2});
 
     Date date4{date};
     date.printTotalAdded();
@@ -630,6 +633,184 @@ void func6() {
     std::cout << e << '\n';
     std::cout << e.getName() << '\n';
     std::cout << Employeee{e}.getName() << '\n';
-
 }
 
+void printByRef(const auto &vec) {
+    std::cout << vec[0] << '\n';
+}
+
+void func8();
+
+void func7() {
+    const std::vector primes{2, 3, 5, 7};
+    std::cout << primes[0] << '\n';
+    std::cout << &primes[0] << '\n';
+    std::cout << &primes[1] << '\n';
+
+    std::cout << primes.size() << '\n';
+    std::vector a_vec(1, 2);
+    std::vector<int> another_vec(34);
+
+    std::cout << a_vec.size() << '\n';
+    std::cout << another_vec.size() << '\n';
+
+    printByRef(a_vec);
+
+    std::string s1{"Hello"};
+    std::cout << s1.size() << '\n';
+    std::string s2{std::move(s1)};
+    std::cout << s1.size() << '\n';
+
+
+    for (size_t i{0}; i < s2.size(); ++i) {
+        std::cout << s2[i] << '\n';
+    }
+
+    for (const char &c: s2) {
+        std::cout << c << '\n';
+    }
+
+    s2.resize(3);
+    std::cout << s2[4] << '\n';
+
+    std::array<int, 7> arr{};
+    arr[0] = 32;
+    std::cout << arr[0] << '\n';
+
+    constexpr int len = 8 + 1;
+    constexpr std::array<int, len> arr2{1, 2};
+
+    constexpr std::array a3{1, 2, 3};
+
+    int x{1};
+    int y{2};
+    int z{3};
+
+    std::array<std::reference_wrapper<int>, 3> arrr{x, y, z};
+    arrr[1].get() = -3;
+    arrr[0] = z;
+
+    std::cout << y << '\n';
+    std::cout << arrr[0] << '\n';
+    arrr[0].get() = -44;
+    std::cout << arrr[2] << '\n';
+
+
+    func8();
+}
+
+
+std::string testFunc() {
+    return std::string{"hello"};
+}
+
+
+struct Student {
+    int id{};
+    std::string_view name{};
+};
+
+enum StudentNames {
+    kenny, // 0
+    kyle, // 1
+    stan, // 2
+    butters, // 3
+    cartman, // 4
+    max_students // 5
+};
+
+void func9();
+
+void func8() {
+    // const char* ptr{ "Alex" };
+    // std::cout << ptr << '\n';                           // print ptr as C-style string
+    // std::cout << static_cast<const void*>(ptr) << '\n'; // print address held by ptr
+
+    std::array arr{0, 1, 2, 3, 4, 5, 6};
+    int *begin{&arr[0]};
+    int *end{begin + std::size(arr)};
+    // int * e{arr.data() + std::size(arr)};
+
+    for (const int *ptr{begin}; ptr < end; ++ptr) {
+        std::cout << *ptr << '\n';
+    }
+
+    for (int *p{arr.begin()}; p != arr.end(); ++p) {
+        std::cout << *p << '\n';
+    }
+
+    for (int &i: arr) {
+        std::cout << i << '\n';
+    }
+
+    std::cout << std::find(arr.begin(), arr.end(), 3) << '\n';
+
+    auto funcc = [](int a) {
+        std::cout << a << '\n';
+    };
+
+    funcc(111);
+
+
+    new int;
+    int *ptr{new(std::nothrow) int{6}};
+    std::cout << *ptr << '\n';
+    std::cout << ptr << '\n';
+    *ptr = 1;
+    std::cout << ptr << '\n';
+    std::cout << *ptr << '\n';
+
+    delete ptr;
+    ptr = nullptr;
+
+    int *array{new int[4]};
+    array[3] = 32;
+    std::cout << array[3] << '\n';
+    delete[] array;
+
+    Employeee<int> *e{new Employeee{1, "name"}};
+    delete e;
+    std::cout << '\n';
+
+    func9();
+}
+
+int foo(int x = 5) // code starts at memory address 0x002717f0
+{
+    return x;
+}
+
+void print_all(int count, ...) {
+    std::va_list list;
+    va_start(list, count);
+
+    for (int arg{0}; arg < count; ++arg) {
+        std::cout << va_arg(list, int) << '\n';
+    }
+
+    va_end(list);
+}
+
+void func9() {
+    std::cout << foo() << '\n';
+    std::cout << reinterpret_cast<void *>(foo) << '\n';
+
+    int (*funcPtr)(int){foo};
+    std::cout << funcPtr(2) << '\n';
+
+    print_all(4, 42, 3, 4, 5);
+
+    constexpr std::array<std::string_view, 4> arr{"apple", "banana", "walnut", "lemon"};
+    const std::string_view* found{
+        std::find_if(arr.begin(), arr.end(), [](std::string_view str) {
+            return str.find("nut") != std::string_view::npos;
+        })
+    };
+
+    if (found == arr.end()) {
+        std::cout << "No nuts" << '\n';
+    } else {
+        std::cout << "Found " << *found << '\n';
+    }
+
+}

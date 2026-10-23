@@ -27,7 +27,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eaf08ffe-cfa7-4399-a690-33382d6af939" name="Changes" comment="" />
+    <list default="true" id="eaf08ffe-cfa7-4399-a690-33382d6af939" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,13 +46,84 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;EthanHosier&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/EthanHosier/one-thing-dark-cpp.git&quot;,
+    &quot;accountId&quot;: &quot;921d956c-96ad-4ea2-a418-f12aea6c6221&quot;
+  }
+}</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Employeee.h" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="V99Nw5WV" />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.000000000066401" />
+      <entry key="MS500" value="1.0093982812198574" />
+      <entry key="S2" value="1.8554031159204243" />
+      <entry key="S5" value="4.903996838930124" />
+      <entry key="S10" value="8.96521632968494" />
+      <entry key="S30" value="17.26814205070365" />
+      <entry key="S60" value="22.71322277538389" />
+      <entry key="M2" value="31.310888699533788" />
+      <entry key="M5" value="47.33197062066073" />
+      <entry key="M10" value="57.752937334631284" />
+      <entry key="M15" value="62.19605965271698" />
+      <entry key="M30" value="67.24768774021544" />
+      <entry key="H1" value="70.02994821243472" />
+      <entry key="H2" value="71.49065921091609" />
+      <entry key="H4" value="72.23914230376202" />
+      <entry key="D1" value="72.8723216552816" />
+      <entry key="W1" value="72.98173883801967" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0402954557844333E-14" />
+      <entry key="MS500" value="0.0015974939857098837" />
+      <entry key="S2" value="0.21297511119664805" />
+      <entry key="S5" value="0.7063464498357321" />
+      <entry key="S10" value="1.2139891924249928" />
+      <entry key="S30" value="2.063656817300548" />
+      <entry key="S60" value="2.6582246077920035" />
+      <entry key="M2" value="4.012742520177211" />
+      <entry key="M5" value="6.994137821496437" />
+      <entry key="M10" value="9.013252285325944" />
+      <entry key="M15" value="9.881058630134493" />
+      <entry key="M30" value="10.870632156853326" />
+      <entry key="H1" value="11.416611630262611" />
+      <entry key="H2" value="11.703466124685525" />
+      <entry key="H4" value="11.850502044780972" />
+      <entry key="D1" value="11.974910878016264" />
+      <entry key="W1" value="11.996411584011886" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="2.94386741268164E-4" />
+      <entry key="MS500" value="0.2068716115605634" />
+      <entry key="S2" value="1.6961425325120827" />
+      <entry key="S5" value="5.382163348448235" />
+      <entry key="S10" value="10.011788594252627" />
+      <entry key="S30" value="19.236723309286127" />
+      <entry key="S60" value="25.304540370015822" />
+      <entry key="M2" value="35.26477137196917" />
+      <entry key="M5" value="54.27975391142616" />
+      <entry key="M10" value="66.7351717188238" />
+      <entry key="M15" value="72.05417557216651" />
+      <entry key="M30" value="78.10555165355542" />
+      <entry key="H1" value="81.43981664618263" />
+      <entry key="H2" value="83.19065922911282" />
+      <entry key="H4" value="84.08788705010923" />
+      <entry key="D1" value="84.84693622913397" />
+      <entry key="W1" value="84.97810800837465" />
+    </decayedShown>
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -82,39 +156,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;CMake Application.hello_world.executor&quot;: &quot;Run&quot;,
-    &quot;CMake Debug.hello_world.executor&quot;: &quot;Debug&quot;,
-    &quot;CidrDebugProfileConversion&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/ethanhosier/Desktop/cpp/hello_world&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/ethanhosier/Desktop/cpp/hello_world/main.cpp&quot;,
-    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;cidr.DebugProfilesConfigurable&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "C/C++ File.main.cpp.executor": "Run",
+    "CMake Application.hello_world.executor": "Run",
+    "CMake Debug.hello_world.executor": "Debug",
+    "CidrDebugProfileConversion": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "copilot.chat.legacySessionMetadata.migrated": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/Users/ethanhosier/Desktop/cpp/hello_world",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/Users/ethanhosier/Desktop/cpp/hello_world/main.cpp",
+    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
+    "settings.editor.selected.configurable": "cidr.DebugProfilesConfigurable",
+    "to.speed.mode.migration.done": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -136,18 +211,33 @@
       </texify-bibtex>
       <method v="2" />
     </configuration>
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="hello_world" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
       <method v="2" />
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="hello_world" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="herro heyy" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="hello_world" TARGET_NAME="hello_world" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="hello_world" RUN_TARGET_NAME="hello_world">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="hello_world" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="hello_world" TARGET_NAME="hello_world" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="hello_world" RUN_TARGET_NAME="hello_world">
+    <configuration name="main.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="hello_world" TARGET_NAME="main.cpp" CONFIG_NAME="main.cpp">
+      <option name="sourceFile" value="main.cpp" />
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
       </method>
+    </configuration>
+    <configuration default="true" type="EXTERNAL_TOOL_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
+      <texify-external>
+        <program>PYTHONTEX</program>
+        <main-file />
+        <work-dir />
+        <envs />
+      </texify-external>
+      <method v="2" />
     </configuration>
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
@@ -166,27 +256,35 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="C/C++ File.main.cpp" />
       <item itemvalue="CMake Application.hello_world" />
       <item itemvalue="CMake Debug.hello_world" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="C/C++ File.main.cpp" />
         <item itemvalue="CMake Debug.hello_world" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SelectedDebugProfileService">{
-  &quot;profileIdByStamp&quot;: [
+  <component name="SelectedDebugProfileService"><![CDATA[{
+  "profileIdByStamp": [
     {
-      &quot;first&quot;: {
-        &quot;##RUN_CONFIGURATION##&quot;: &quot;CMake Application.hello_world&quot;,
-        &quot;cmake&quot;: &quot;CMakeBuildProfile:Debug&quot;
+      "first": {
+        "##RUN_CONFIGURATION##": "CMake Application.hello_world",
+        "cmake": "CMakeBuildProfile:Debug"
       },
-      &quot;second&quot;: &quot;adb49f39-db62-4d00-b298-cc4ceb1f6823&quot;
+      "second": "adb49f39-db62-4d00-b298-cc4ceb1f6823"
+    },
+    {
+      "first": {
+        "##RUN_CONFIGURATION##": "C/C++ File.main.cpp"
+      },
+      "second": "adb49f39-db62-4d00-b298-cc4ceb1f6823"
     }
   ],
-  &quot;modificationCount&quot;: 26
-}</component>
+  "modificationCount": 36
+}]]></component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="eaf08ffe-cfa7-4399-a690-33382d6af939" name="Changes" comment="" />
