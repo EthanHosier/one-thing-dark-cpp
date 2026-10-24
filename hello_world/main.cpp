@@ -1028,3 +1028,131 @@ void func10() {
     func11();
 }
 
+class Resource
+{
+public:
+    Resource() { std::cout << "Resource acquired\n"; }
+    ~Resource() { std::cout << "Resource destroyed\n"; }
+};
+
+void take_ownership(std::unique_ptr<Resource> r) {
+    std::cout << "Ownership taken" << '\n';
+}
+
+void useResource(Resource const& r) {
+    std::cout << "Resource used" << '\n';
+}
+
+std::weak_ptr<Resource> getWeakPtr() {
+    std::shared_ptr r {std::make_shared<Resource>()};
+    return {r};
+}
+
+void func12();
+
+void func11() {
+    {
+        std::unique_ptr res {std::make_unique<Resource>()};
+        std::unique_ptr<Resource> res2 = std::move(res);
+
+        useResource(*res2);
+        take_ownership(std::move(res2));
+        std::cout << "After given ownership" << '\n';
+
+        std::shared_ptr ptr1{std::make_shared<Resource>()};
+        {
+            std::shared_ptr ptr2 {ptr1};
+            std::cout << ptr2.use_count() << '\n';
+            std::cout << ptr1.use_count() << '\n';
+        }
+
+        std::cout << ptr1.use_count() << '\n';
+    }
+
+    if (auto r = getWeakPtr().lock()) {
+        std::cout << 1 << '\n';
+    } else {
+        std::cout << 2 << '\n';
+    }
+
+    func12();
+}
+
+class Person {
+protected:
+    int m_age{};
+
+public:
+    const std::string m_name{};
+    const int age() const {return m_age;}
+
+    Person(std::string_view name = "", int age = 0) : m_age(age), m_name(name) {
+        std::cout << "Initializing person" << '\n';
+
+    };
+    ~Person() {
+        std::cout << "Destroying person" << '\n';
+    }
+};
+
+class BaseballPlayer : public Person {
+public:
+    int m_homeRuns;
+
+    BaseballPlayer(int home_runs = 0) : m_homeRuns(home_runs), Person("bob",5) {
+        std::cout << "Initializing baseball player" << '\n';
+
+        m_age = 44;
+    };
+
+    ~BaseballPlayer() {
+        std::cout << "Destroying baseball player" << '\n';
+    }
+};
+
+class Base
+{
+public:
+    int m_public {9999};
+protected:
+    int m_protected {};
+private:
+    int m_private {};
+};
+
+class Pri: private Base // note: private inheritance
+{
+private:
+    int m_pri_private {4};
+    // Private inheritance means:
+    // Public inherited members become private (so m_public is treated as private)
+    // Protected inherited members become private (so m_protected is treated as private)
+    // Private inherited members stay inaccessible (so m_private is inaccessible)
+public:
+    Pri()
+    {
+        m_public = 1; // okay: m_public is now private in Pri
+        m_protected = 2; // okay: m_protected is now private in Pri
+        // m_private = 3; // not okay: derived classes can't access private members in the base class
+    }
+
+    friend void idk(Pri p);
+};
+
+void idk(Pri p) {
+    p.m_pri_private = 3;
+}
+
+void func12() {
+    {
+        BaseballPlayer bp{3};
+        std::cout << bp.m_name << ',' << bp.age() << ',' << bp.m_homeRuns << '\n';
+        std::cout << sizeof(Person) << '\n';
+        std::cout << sizeof(BaseballPlayer) << '\n';
+    }
+
+    Base b{};
+    Pri p{};
+
+    std::cout << b.m_public << '\n';
+}
