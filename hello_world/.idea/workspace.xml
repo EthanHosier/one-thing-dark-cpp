@@ -24,6 +24,7 @@
   <component name="CMakeSettings">
     <configurations>
       <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+      <configuration PROFILE_NAME="Debug-event-trace" ENABLED="true" CONFIG_NAME="Debug" GENERATION_OPTIONS="--profiling-format=google-trace --profiling-output=CMakeFiles/clion-event-trace.json" />
     </configurations>
   </component>
   <component name="ChangeListManager">
@@ -68,61 +69,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000570325041767" />
-      <entry key="MS500" value="1.4134108255013609" />
-      <entry key="S2" value="3.265026564578347" />
-      <entry key="S5" value="4.301906497140109" />
-      <entry key="S10" value="5.159726422278338" />
-      <entry key="S30" value="7.309735715853527" />
-      <entry key="S60" value="13.158344423519116" />
-      <entry key="M2" value="27.768653065139116" />
-      <entry key="M5" value="66.82805700462121" />
-      <entry key="M10" value="118.48494345680899" />
-      <entry key="M15" value="159.58797820358942" />
-      <entry key="M30" value="256.60071267656485" />
-      <entry key="H1" value="397.31756842804555" />
-      <entry key="H2" value="552.6832883330765" />
-      <entry key="H4" value="692.6274167559058" />
-      <entry key="D1" value="1082.483934760744" />
-      <entry key="W1" value="1274.377707799837" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0001932559797306" />
+      <entry key="S5" value="1.0986077714654183" />
+      <entry key="S10" value="1.823680832060508" />
+      <entry key="S30" value="4.425015713167971" />
+      <entry key="S60" value="6.021228128856486" />
+      <entry key="M2" value="9.194298755960151" />
+      <entry key="M5" value="25.499690976120178" />
+      <entry key="M10" value="54.61290723057075" />
+      <entry key="M15" value="82.8950448270861" />
+      <entry key="M30" value="175.9471044958747" />
+      <entry key="H1" value="361.19682790880927" />
+      <entry key="H2" value="616.7628298467041" />
+      <entry key="H4" value="869.0958866327363" />
+      <entry key="D1" value="1420.8496338318098" />
+      <entry key="W1" value="1660.767671893542" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="7.509982202278617E-100" />
-      <entry key="S2" value="1.6554258285911304E-25" />
-      <entry key="S5" value="1.223387100026809E-10" />
-      <entry key="S10" value="1.1062671325120667E-5" />
-      <entry key="S30" value="0.024811025112235905" />
-      <entry key="S60" value="0.2372924481114056" />
-      <entry key="M2" value="0.983866469119629" />
-      <entry key="M5" value="3.8081669557808646" />
-      <entry key="M10" value="9.190765346352755" />
-      <entry key="M15" value="14.433796246739496" />
-      <entry key="M30" value="28.164180427820703" />
-      <entry key="H1" value="47.24213122169036" />
-      <entry key="H2" value="66.53075585245804" />
-      <entry key="H4" value="82.80315021219485" />
-      <entry key="D1" value="125.77282186398803" />
-      <entry key="W1" value="146.60120736587265" />
+      <entry key="MS500" value="1.936749691634E-311" />
+      <entry key="S2" value="2.09782073587175E-78" />
+      <entry key="S5" value="8.486084453479892E-32" />
+      <entry key="S10" value="2.913088473834596E-16" />
+      <entry key="S30" value="6.636360878883655E-6" />
+      <entry key="S60" value="0.0027739095314571133" />
+      <entry key="M2" value="0.08972136468865458" />
+      <entry key="M5" value="1.4076906821732882" />
+      <entry key="M10" value="4.626911214587464" />
+      <entry key="M15" value="7.886839794511247" />
+      <entry key="M30" value="18.214358485613882" />
+      <entry key="H1" value="38.97343349132724" />
+      <entry key="H2" value="68.00723986353" />
+      <entry key="H4" value="96.47067091148473" />
+      <entry key="D1" value="157.39974621236973" />
+      <entry key="W1" value="183.54115482401372" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.016796810810270416" />
-      <entry key="MS500" value="0.8322284125191831" />
-      <entry key="S2" value="3.0435406684595026" />
-      <entry key="S5" value="4.194129176923597" />
-      <entry key="S10" value="5.087372295839527" />
-      <entry key="S30" value="7.288138535076649" />
-      <entry key="S60" value="13.33482040956699" />
-      <entry key="M2" value="28.675072583063443" />
-      <entry key="M5" value="70.56616854317282" />
-      <entry key="M10" value="127.6186694760885" />
-      <entry key="M15" value="173.97176820178979" />
-      <entry key="M30" value="284.72496804222413" />
-      <entry key="H1" value="444.5289742213108" />
-      <entry key="H2" value="619.1928601163836" />
-      <entry key="H4" value="775.4173715956416" />
-      <entry key="D1" value="1208.2533502500407" />
-      <entry key="W1" value="1420.978343887419" />
+      <entry key="MS100" value="7.77930070385292E-5" />
+      <entry key="MS500" value="0.15072597846134506" />
+      <entry key="S2" value="0.6232600175589817" />
+      <entry key="S5" value="0.9221036836164009" />
+      <entry key="S10" value="1.7152688550895754" />
+      <entry key="S30" value="4.367765995099755" />
+      <entry key="S60" value="5.98882852315848" />
+      <entry key="M2" value="9.259385539980876" />
+      <entry key="M5" value="26.881545210341372" />
+      <entry key="M10" value="59.21341994272425" />
+      <entry key="M15" value="90.75604461607513" />
+      <entry key="M30" value="194.13560636020236" />
+      <entry key="H1" value="400.14447663376234" />
+      <entry key="H2" value="684.7481682603922" />
+      <entry key="H4" value="965.55110334064" />
+      <entry key="D1" value="1578.2451290116876" />
+      <entry key="W1" value="1844.3081144519192" />
     </decayedShown>
   </component>
   <component name="ProjectApplicationVersion">
@@ -186,7 +187,7 @@
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "/Users/ethanhosier/Desktop/cpp/hello_world/main.cpp",
     "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "settings.editor.selected.configurable": "cidr.DebugProfilesConfigurable",
+    "settings.editor.selected.configurable": "CMakeSettings",
     "to.speed.mode.migration.done": "true"
   }
 }]]></component>

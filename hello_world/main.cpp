@@ -435,10 +435,11 @@ std::ostream &operator<<(std::ostream &out, Color color) {
     return out << toString(color);
 }
 
-enum class Animal {
-    Dog,
-    Cat
-};
+//
+// enum class Animal {
+//     Dog,
+//     Cat
+// };
 
 struct Employee {
     int id{};
@@ -491,11 +492,11 @@ void func5() {
     std::cout << apple << '\n';
     std::cout << shirt << '\n';
 
-    Animal dog{Animal::Dog};
-    Animal cat{Animal::Cat};
-
-    using enum Animal;
-    Animal dog2{Dog};
+    // Animal dog{Animal::Dog};
+    // Animal cat{Animal::Cat};
+    //
+    // using enum Animal;
+    // Animal dog2{Dog};
 
     Employee e{.id = 4, .age = 3};
     std::cout << e.age << ',' << e.wage << '\n';
@@ -792,8 +793,8 @@ void print_all(int count, ...) {
     va_end(list);
 }
 
-void doSomethingToNumbers(const auto& fn) {
-    fn(1,2,3);
+void doSomethingToNumbers(const auto &fn) {
+    fn(1, 2, 3);
 }
 
 void func10();
@@ -813,7 +814,7 @@ void func9() {
         return str.find("nut") != std::string_view::npos;
     };
 
-    const std::string_view* found{
+    const std::string_view *found{
         std::find_if(arr.begin(), arr.end(), containsNut)
     };
 
@@ -832,22 +833,23 @@ void func9() {
     int x = 34;
     int y = 6;
 
-    auto somethingFn {
+    auto somethingFn{
         // [funcPtr, &x, y](int i1, int i2, int i3) {
-         // [=](int i1, int i2, int i3) {
+        // [=](int i1, int i2, int i3) {
         [&](int i1, int i2, int i3) {
             std::cout << funcPtr(i1) << ',' << --x << ',' << y << '\n';
             std::cout << i1 << ',' << i2 << ',' << i3 << '\n';
         }
     };
 
-    x=35;
+    x = 35;
     y = 8;
     doSomethingToNumbers(somethingFn);
 
     int ammo{10};
     auto shoot{
-        [ammo]() mutable { // now mutable
+        [ammo]() mutable {
+            // now mutable
             // We're allowed to modify ammo now
             --ammo;
 
@@ -858,11 +860,12 @@ void func9() {
     shoot();
     shoot();
 
-    int ammo2{ 10 };
+    int ammo2{10};
 
     auto shoot2{
         // We don't need mutable anymore
-        [&ammo2]() { // &ammo means ammo is captured by reference
+        [&ammo2]() {
+            // &ammo means ammo is captured by reference
             // Changes to ammo will affect main's ammo
             --ammo2;
 
@@ -874,8 +877,8 @@ void func9() {
 
     std::cout << ammo2 << " shot(s) left\n";
 
-    Cents cents {1};
-    std:: cout << cents + 332 << '\n';
+    Cents cents{1};
+    std::cout << cents + 332 << '\n';
 
     std::cout << (cents + 3) * 2 << '\n';
     std::cout << (cents += 4) << '\n';
@@ -893,11 +896,11 @@ void func9() {
     func10();
 }
 
-void funr(const int& ref) {
+void funr(const int &ref) {
     std::cout << ref << '\n';
 }
 
-void fun(int&& rref) // r-value arguments will select this function
+void fun(int &&rref) // r-value arguments will select this function
 {
     rref = 1;
     std::cout << rref << '\n';
@@ -907,38 +910,34 @@ void fun(int&& rref) // r-value arguments will select this function
 #include <iostream>
 
 template<typename T>
-class Auto_ptr5
-{
-    T* m_ptr {};
+class Auto_ptr5 {
+    T *m_ptr{};
+
 public:
-    Auto_ptr5(T* ptr = nullptr)
-        : m_ptr { ptr }
-    {
+    Auto_ptr5(T *ptr = nullptr)
+        : m_ptr{ptr} {
     }
 
-    ~Auto_ptr5()
-    {
+    ~Auto_ptr5() {
         delete m_ptr;
     }
 
     // Copy constructor -- no copying allowed!
-    Auto_ptr5(const Auto_ptr5& a) = delete;
+    Auto_ptr5(const Auto_ptr5 &a) = delete;
 
     // Move constructor
     // Transfer ownership of a.m_ptr to m_ptr
-    Auto_ptr5(Auto_ptr5&& a) noexcept
-        : m_ptr { a.m_ptr }
-    {
+    Auto_ptr5(Auto_ptr5 &&a) noexcept
+        : m_ptr{a.m_ptr} {
         a.m_ptr = nullptr;
     }
 
     // Copy assignment -- no copying allowed!
-    Auto_ptr5& operator=(const Auto_ptr5& a) = delete;
+    Auto_ptr5 &operator=(const Auto_ptr5 &a) = delete;
 
     // Move assignment
     // Transfer ownership of a.m_ptr to m_ptr
-    Auto_ptr5& operator=(Auto_ptr5&& a) noexcept
-    {
+    Auto_ptr5 &operator=(Auto_ptr5 &&a) noexcept {
         // Self-assignment detection
         if (&a == this)
             return *this;
@@ -953,43 +952,38 @@ public:
         return *this;
     }
 
-    T& operator*() const { return *m_ptr; }
-    T* operator->() const { return m_ptr; }
+    T &operator*() const { return *m_ptr; }
+    T *operator->() const { return m_ptr; }
     bool isNull() const { return m_ptr == nullptr; }
 };
 
 
-
-class Name
-{
+class Name {
 private:
-    std::string m_name {};
+    std::string m_name{};
 
 public:
-    Name(std::string_view name) : m_name{ name }
-    {
+    Name(std::string_view name) : m_name{name} {
     }
 
-    Name(const Name& name) = delete;
-    Name& operator=(const Name& name) = delete;
+    Name(const Name &name) = delete;
+
+    Name &operator=(const Name &name) = delete;
 
     // Create our own swap friend function to swap the members of Name
-    void swap(Name& a, Name& b) noexcept
-    {
+    void swap(Name &a, Name &b) noexcept {
         // We avoid recursive calls by invoking std::swap on the std::string member,
         // not on Name
         std::swap(a.m_name, b.m_name);
     }
 
-    Name(Name&& name) noexcept
-    {
+    Name(Name &&name) noexcept {
         std::cout << "Move ctor\n";
 
         swap(*this, name); // Now calling our swap, not std::swap
     }
 
-    Name& operator=(Name&& name) noexcept
-    {
+    Name &operator=(Name &&name) noexcept {
         std::cout << "Move assign\n";
 
         swap(*this, name); // Now calling our swap, not std::swap
@@ -997,17 +991,17 @@ public:
         return *this;
     }
 
-    friend std::ostream& operator <<(std::ostream& os,  Name& n ) {
+    friend std::ostream &operator <<(std::ostream &os, Name &n) {
         return os << n.m_name;
     }
 
-    const std::string& get() const { return m_name; }
+    const std::string &get() const { return m_name; }
 };
 
 void func11();
 
 void func10() {
-    int&& rref{ 5 };
+    int &&rref{5};
     rref = 10;
 
     std::cout << rref << '\n';
@@ -1015,8 +1009,8 @@ void func10() {
     // fun(std::move(rref));
     funr(1);
 
-    int* x {new int {4}};
-    Auto_ptr5 autoptr {x};
+    int *x{new int{4}};
+    Auto_ptr5 autoptr{x};
 
     Name n{"hello"};
     Name n2{"hello2"};
@@ -1028,8 +1022,7 @@ void func10() {
     func11();
 }
 
-class Resource
-{
+class Resource {
 public:
     Resource() { std::cout << "Resource acquired\n"; }
     ~Resource() { std::cout << "Resource destroyed\n"; }
@@ -1039,12 +1032,12 @@ void take_ownership(std::unique_ptr<Resource> r) {
     std::cout << "Ownership taken" << '\n';
 }
 
-void useResource(Resource const& r) {
+void useResource(Resource const &r) {
     std::cout << "Resource used" << '\n';
 }
 
 std::weak_ptr<Resource> getWeakPtr() {
-    std::shared_ptr r {std::make_shared<Resource>()};
+    std::shared_ptr r{std::make_shared<Resource>()};
     return {r};
 }
 
@@ -1052,7 +1045,7 @@ void func12();
 
 void func11() {
     {
-        std::unique_ptr res {std::make_unique<Resource>()};
+        std::unique_ptr res{std::make_unique<Resource>()};
         std::unique_ptr<Resource> res2 = std::move(res);
 
         useResource(*res2);
@@ -1061,7 +1054,7 @@ void func11() {
 
         std::shared_ptr ptr1{std::make_shared<Resource>()};
         {
-            std::shared_ptr ptr2 {ptr1};
+            std::shared_ptr ptr2{ptr1};
             std::cout << ptr2.use_count() << '\n';
             std::cout << ptr1.use_count() << '\n';
         }
@@ -1084,12 +1077,12 @@ protected:
 
 public:
     const std::string m_name{};
-    const int age() const {return m_age;}
+    const int age() const { return m_age; }
 
     Person(std::string_view name = "", int age = 0) : m_age(age), m_name(name) {
         std::cout << "Initializing person" << '\n';
-
     };
+
     ~Person() {
         std::cout << "Destroying person" << '\n';
     }
@@ -1099,7 +1092,7 @@ class BaseballPlayer : public Person {
 public:
     int m_homeRuns;
 
-    BaseballPlayer(int home_runs = 0) : m_homeRuns(home_runs), Person("bob",5) {
+    BaseballPlayer(int home_runs = 0) : m_homeRuns(home_runs), Person("bob", 5) {
         std::cout << "Initializing baseball player" << '\n';
 
         m_age = 44;
@@ -1110,27 +1103,34 @@ public:
     }
 };
 
-class Base
-{
+class Base {
 public:
-    int m_public {9999};
+    int m_public{9999};
+
+    void print(int) { std::cout << "Base::print(int)\n"; }
+    void print(double) { std::cout << "Base::print(double)\n"; }
+    void print(std::string_view) { std::cout << "Base::print(string_view)\n"; }
+
 protected:
-    int m_protected {};
+    int m_protected{};
+
 private:
-    int m_private {};
+    int m_private{};
 };
 
-class Pri: private Base // note: private inheritance
+class Pri : private Base // note: private inheritance
 {
 private:
-    int m_pri_private {4};
+    int m_pri_private{4};
     // Private inheritance means:
     // Public inherited members become private (so m_public is treated as private)
     // Protected inherited members become private (so m_protected is treated as private)
     // Private inherited members stay inaccessible (so m_private is inaccessible)
 public:
-    Pri()
-    {
+    using Base::print;
+    void print(double) { std::cout << "Derived::print(double)"; }
+
+    Pri() {
         m_public = 1; // okay: m_public is now private in Pri
         m_protected = 2; // okay: m_protected is now private in Pri
         // m_private = 3; // not okay: derived classes can't access private members in the base class
@@ -1139,9 +1139,19 @@ public:
     friend void idk(Pri p);
 };
 
+class Pub : public Base {
+public:
+    // void print(std::string_view) = delete;
+
+private:
+    using Base::print;
+};
+
 void idk(Pri p) {
     p.m_pri_private = 3;
 }
+
+void func13();
 
 void func12() {
     {
@@ -1153,6 +1163,121 @@ void func12() {
 
     Base b{};
     Pri p{};
-
+    Pub pub{};
     std::cout << b.m_public << '\n';
+    p.print(312);
+    // pub.print("hello");
+    pub.Base::print("Hello");
+    func13();
+}
+
+#include <iostream>
+#include <string_view>
+#include <string>
+
+class Animal {
+protected:
+    std::string m_name;
+
+    // We're making this constructor protected because
+    // we don't want people creating Animal objects directly,
+    // but we still want derived classes to be able to use it.
+    Animal(std::string_view name)
+        : m_name{name} {
+    }
+
+    // To prevent slicing (covered later)
+    Animal(const Animal &) = delete;
+
+    Animal &operator=(const Animal &) = delete;
+
+public:
+    std::string_view getName() const { return m_name; }
+    std::string_view speak() const { return "???"; }
+};
+
+class Cat : public Animal {
+public:
+    Cat(std::string_view name)
+        : Animal{name} {
+    }
+
+    std::string_view speak() const { return "Meow"; }
+};
+
+class Dog : public Animal {
+public:
+    Dog(std::string_view name)
+        : Animal{name} {
+    }
+
+    std::string_view speak() const { return "Woof"; }
+};
+
+void func14();
+
+void func13() {
+    const Cat cat{"Fred"};
+    std::cout << cat.speak() << '\n';
+
+    const Dog dog{"Bob"};
+    std::cout << dog.speak() << '\n';
+
+    const Animal *animal{&cat};
+    std::cout << animal->speak() << '\n';
+
+    animal = &dog;
+    std::cout << animal->speak() << '\n';
+
+    func14();
+}
+
+void func14() {
+    class Base {
+    public:
+        virtual std::string_view getName() const { return "Base"; }
+
+        void doSomething() {
+            idk();
+            std::cout << "Base::doSomething()" << '\n';
+        }
+
+        virtual std::unique_ptr<Base> makeNew() const {
+            return std::make_unique<Base>();
+        }
+
+        virtual Base * getThis() {
+            std::cout << "called Base::getThis()\n";
+            return this;
+        }
+
+    private:
+        virtual void idk() {
+            std::cout << "idk" << '\n';
+        }
+    };
+
+    class Derived : public Base {
+    public:
+        std::string_view getName() const override { return "Derived"; }
+
+        void doSomething() {
+            std::cout << "Derived::doSomething()" << '\n';
+        }
+
+        std::unique_ptr<Base> makeNew() const override {
+            return std::make_unique<Derived>();
+        }
+
+        Derived * getThis() override {
+            std::cout << "called Derived::getThis()\n";
+            return this;
+        }
+    };
+
+    Derived derived{};
+    Base &rBase{derived};
+    std::cout << "rBase is a " << rBase.getName() << '\n';
+    rBase.doSomething();
+    derived.doSomething();
 }
