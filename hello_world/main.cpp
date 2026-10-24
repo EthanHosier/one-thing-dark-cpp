@@ -6,6 +6,7 @@
 #include <cassert>
 #include <string_view>
 
+#include "Cents.h"
 #include "Employeee.h"
 #include "aNum/aNum.h"
 #include "aNum/aNum.h"
@@ -791,6 +792,12 @@ void print_all(int count, ...) {
     va_end(list);
 }
 
+void doSomethingToNumbers(const auto& fn) {
+    fn(1,2,3);
+}
+
+void func10();
+
 void func9() {
     std::cout << foo() << '\n';
     std::cout << reinterpret_cast<void *>(foo) << '\n';
@@ -801,10 +808,13 @@ void func9() {
     print_all(4, 42, 3, 4, 5);
 
     constexpr std::array<std::string_view, 4> arr{"apple", "banana", "walnut", "lemon"};
+
+    const auto containsNut = [](std::string_view str) {
+        return str.find("nut") != std::string_view::npos;
+    };
+
     const std::string_view* found{
-        std::find_if(arr.begin(), arr.end(), [](std::string_view str) {
-            return str.find("nut") != std::string_view::npos;
-        })
+        std::find_if(arr.begin(), arr.end(), containsNut)
     };
 
     if (found == arr.end()) {
@@ -813,4 +823,208 @@ void func9() {
         std::cout << "Found " << *found << '\n';
     }
 
+    constexpr double (*addNumbers1)(double, double){
+        [](double a, double b) {
+            return a + b;
+        }
+    };
+
+    int x = 34;
+    int y = 6;
+
+    auto somethingFn {
+        // [funcPtr, &x, y](int i1, int i2, int i3) {
+         // [=](int i1, int i2, int i3) {
+        [&](int i1, int i2, int i3) {
+            std::cout << funcPtr(i1) << ',' << --x << ',' << y << '\n';
+            std::cout << i1 << ',' << i2 << ',' << i3 << '\n';
+        }
+    };
+
+    x=35;
+    y = 8;
+    doSomethingToNumbers(somethingFn);
+
+    int ammo{10};
+    auto shoot{
+        [ammo]() mutable { // now mutable
+            // We're allowed to modify ammo now
+            --ammo;
+
+            std::cout << "Pew! " << ammo << " shot(s) left.\n";
+        }
+    };
+
+    shoot();
+    shoot();
+
+    int ammo2{ 10 };
+
+    auto shoot2{
+        // We don't need mutable anymore
+        [&ammo2]() { // &ammo means ammo is captured by reference
+            // Changes to ammo will affect main's ammo
+            --ammo2;
+
+            std::cout << "Pew! " << ammo2 << " shot(s) left.\n";
+        }
+    };
+
+    shoot2();
+
+    std::cout << ammo2 << " shot(s) left\n";
+
+    Cents cents {1};
+    std:: cout << cents + 332 << '\n';
+
+    std::cout << (cents + 3) * 2 << '\n';
+    std::cout << (cents += 4) << '\n';
+    std::cout << cents << '\n';
+    std::cout << -cents << '\n';
+
+    std::cout << (Cents{1} < Cents{2}) << '\n';
+    std::cout << (Cents{1} > Cents{2}) << '\n';
+    std::cout << (Cents{1} >= Cents{1}) << '\n';
+
+    int index = 64;
+    cents[index] = 12;
+    std::cout << cents[index] << '\n';
+
+    func10();
 }
+
+void funr(const int& ref) {
+    std::cout << ref << '\n';
+}
+
+void fun(int&& rref) // r-value arguments will select this function
+{
+    rref = 1;
+    std::cout << rref << '\n';
+}
+
+
+#include <iostream>
+
+template<typename T>
+class Auto_ptr5
+{
+    T* m_ptr {};
+public:
+    Auto_ptr5(T* ptr = nullptr)
+        : m_ptr { ptr }
+    {
+    }
+
+    ~Auto_ptr5()
+    {
+        delete m_ptr;
+    }
+
+    // Copy constructor -- no copying allowed!
+    Auto_ptr5(const Auto_ptr5& a) = delete;
+
+    // Move constructor
+    // Transfer ownership of a.m_ptr to m_ptr
+    Auto_ptr5(Auto_ptr5&& a) noexcept
+        : m_ptr { a.m_ptr }
+    {
+        a.m_ptr = nullptr;
+    }
+
+    // Copy assignment -- no copying allowed!
+    Auto_ptr5& operator=(const Auto_ptr5& a) = delete;
+
+    // Move assignment
+    // Transfer ownership of a.m_ptr to m_ptr
+    Auto_ptr5& operator=(Auto_ptr5&& a) noexcept
+    {
+        // Self-assignment detection
+        if (&a == this)
+            return *this;
+
+        // Release any resource we're holding
+        delete m_ptr;
+
+        // Transfer ownership of a.m_ptr to m_ptr
+        m_ptr = a.m_ptr;
+        a.m_ptr = nullptr;
+
+        return *this;
+    }
+
+    T& operator*() const { return *m_ptr; }
+    T* operator->() const { return m_ptr; }
+    bool isNull() const { return m_ptr == nullptr; }
+};
+
+
+
+class Name
+{
+private:
+    std::string m_name {};
+
+public:
+    Name(std::string_view name) : m_name{ name }
+    {
+    }
+
+    Name(const Name& name) = delete;
+    Name& operator=(const Name& name) = delete;
+
+    // Create our own swap friend function to swap the members of Name
+    void swap(Name& a, Name& b) noexcept
+    {
+        // We avoid recursive calls by invoking std::swap on the std::string member,
+        // not on Name
+        std::swap(a.m_name, b.m_name);
+    }
+
+    Name(Name&& name) noexcept
+    {
+        std::cout << "Move ctor\n";
+
+        swap(*this, name); // Now calling our swap, not std::swap
+    }
+
+    Name& operator=(Name&& name) noexcept
+    {
+        std::cout << "Move assign\n";
+
+        swap(*this, name); // Now calling our swap, not std::swap
+
+        return *this;
+    }
+
+    friend std::ostream& operator <<(std::ostream& os,  Name& n ) {
+        return os << n.m_name;
+    }
+
+    const std::string& get() const { return m_name; }
+};
+
+void func11();
+
+void func10() {
+    int&& rref{ 5 };
+    rref = 10;
+
+    std::cout << rref << '\n';
+
+    // fun(std::move(rref));
+    funr(1);
+
+    int* x {new int {4}};
+    Auto_ptr5 autoptr {x};
+
+    Name n{"hello"};
+    Name n2{"hello2"};
+
+    n = std::move(n2);
+
+    std::cout << n << ',' << n2 << '\n';
+
+    func11();
+}
+

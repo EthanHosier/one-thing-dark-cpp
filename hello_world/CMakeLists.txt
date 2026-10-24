@@ -8,4 +8,6 @@ add_compile_options(-Werror)
 add_executable(hello_world main.cpp
         aNum/aNum.cpp
         Employeee.cpp
-        Employeee.h)
+        Employeee.h
+        Cents.cpp
+        Cents.h)
