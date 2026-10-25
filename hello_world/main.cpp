@@ -1397,6 +1397,13 @@ public:
     Container(T t) : ContainerBase<T, container_size>{t} {}
 };
 
+
+template <typename T,int container_size>
+class Container<T*, container_size>: public ContainerBase<T*, 4200> {
+public:
+    Container(T* t) : ContainerBase<T*, 4200>{t} {}
+};
+
 template <int container_size>
 class Container<double, container_size>: public ContainerBase<double, container_size> {
 public:
@@ -1447,4 +1454,7 @@ void func16() {
 
     std::string s{"hello"};
     doSomething<3>(s);
+
+    int x{1};
+    std::cout << Container<int*, 5>{&x}.size() << '\n';
 };
