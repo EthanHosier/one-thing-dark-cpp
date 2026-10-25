@@ -1441,10 +1441,9 @@ void doSomething(std::string& t) {
 //     }
 // };
 
+void func17();
 
 void func16() {
-
-
     std::cout << Container<int, 1>{1}.val << '\n';
     std::cout << Container<double, 1>{1.2}.val << '\n';
     std::cout << Container<std::string, 1>{"Hello"}.val << '\n';
@@ -1457,4 +1456,89 @@ void func16() {
 
     int x{1};
     std::cout << Container<int*, 5>{&x}.size() << '\n';
+
+    func17();
 };
+
+void funcThrow() {
+    throw "hello"sv;
+}
+
+
+class MyException2 : public std::exception {
+public:
+    const char* what() const noexcept override {
+        return "Something went wrong!";
+    }
+};
+
+class MyException : public std::runtime_error {
+public:
+    MyException() : std::runtime_error{"My exceptionsnsnnsn"} {}
+};
+
+void func17() {
+    try {
+        try {
+            funcThrow();
+        } catch (const int& n) {
+            std::cout << "Exception: " << n <<'\n';
+        }
+    } catch (const std::string_view & sv) {
+        std::cout << "String_view exception caught: " << sv << '\n';
+    }
+
+    std::cout << "Continue" << '\n';
+
+    class Member
+    {
+    public:
+        Member()
+        {
+            std::cout << "Member allocated some resources\n";
+        }
+
+        ~Member()
+        {
+            std::cout << "Member cleaned up\n";
+        }
+    };
+
+    class A
+    {
+    private:
+        int m_x {};
+        Member m_member;
+
+    public:
+        A(int x) try : m_x{x}
+        {
+            if (x <= 0)
+                throw 1;
+
+        } catch (...) {
+            std::cout << "Exception caughttttt" << '\n';
+            throw;
+        }
+
+
+        void fail() {
+            throw MyException{};
+        }
+
+        ~A()
+        {
+            std::cout << "~A\n";
+        }
+    };
+
+    try {
+        A a{-1};
+        a.fail();
+    } catch (const MyException& e) {
+        std::cout << "A caught: " << e.what() << '\n';
+    } catch (...) {
+        std::cout << "A caught" << '\n';
+    }
+
+}
