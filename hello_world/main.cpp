@@ -1232,6 +1232,9 @@ void func13() {
     func14();
 }
 
+void func15();
+
+
 void func14() {
     class Base {
     public:
@@ -1251,10 +1254,13 @@ void func14() {
             return this;
         }
 
+        virtual ~Base() {std::cout << "Base destructor" <<'\n';}
+
     private:
         virtual void idk() {
             std::cout << "idk" << '\n';
         }
+
     };
 
     class Derived : public Base {
@@ -1269,15 +1275,93 @@ void func14() {
             return std::make_unique<Derived>();
         }
 
-        Derived * getThis() override {
+        Derived* getThis() override {
             std::cout << "called Derived::getThis()\n";
             return this;
         }
+
+        ~Derived() override {std::cout << "Derived destructor" <<'\n';}
     };
 
-    Derived derived{};
-    Base &rBase{derived};
-    std::cout << "rBase is a " << rBase.getName() << '\n';
-    rBase.doSomething();
-    derived.doSomething();
+    auto takeOwnership{
+        [](std::unique_ptr<Base> b) {
+            std::cout << "take ownership" << '\n';
+        }
+    };
+    {
+        Derived derived{};
+        Base &rBase{derived};
+        std::cout << "rBase is a " << rBase.getName() << '\n';
+        rBase.doSomething();
+        derived.doSomething();
+
+        std::unique_ptr u = std::make_unique<Derived>(derived);
+        takeOwnership(std::move(u));
+        std::cout << "After take ownership" << '\n';
+    }
+    func15();
+}
+
+void func15() {
+    class ISpeaker {
+    public:
+        virtual ~ISpeaker() = default;
+
+        virtual void speak() = 0;
+    };
+
+    class Person : ISpeaker {
+    public:
+        void speak() override {
+            std::cout << "Hello (as person)" << '\n';
+        }
+
+        ~Person() override {
+            std::cout << "Person destructor" << '\n';
+        }
+    };
+    {
+        Person p{};
+        p.speak();
+    }
+    class A {
+    public:
+        int val;
+        A(int x) : val{x} {}
+        virtual ~A() = default;
+
+        friend std::ostream& operator<< (std::ostream&, const A& a) {
+        }
+    };
+
+    class B : virtual public A {
+    public:
+        int idk;
+        B() : idk{3}, A{10} {}
+    };
+
+    class Printer : public B {
+    public:
+        Printer() : A{20}, B{} {}
+    };
+
+    class Copier : public Printer {
+    public:
+        Copier() : A{30}, Printer{} {}
+    };
+
+    Copier c;
+    std::cout << c.val << '\n';
+
+
+    A *a{new Printer{}};
+    Printer *d {dynamic_cast<Printer *>(a)};
+    if (!d) {
+        std::cout << "Dynamic cast failed!" << '\n';
+        return;
+    }
+
+    std::cout << "Dynamic cast succeeded! idk: " << d->idk << '\n';
+
+
 }
