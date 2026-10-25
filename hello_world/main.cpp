@@ -4,6 +4,7 @@
 #define NDEBUG
 
 #include <cassert>
+#include <iomanip>
 #include <string_view>
 
 #include "Cents.h"
@@ -1302,6 +1303,8 @@ void func14() {
     func15();
 }
 
+void func16();
+
 void func15() {
     class ISpeaker {
     public:
@@ -1329,9 +1332,6 @@ void func15() {
         int val;
         A(int x) : val{x} {}
         virtual ~A() = default;
-
-        friend std::ostream& operator<< (std::ostream&, const A& a) {
-        }
     };
 
     class B : virtual public A {
@@ -1363,5 +1363,88 @@ void func15() {
 
     std::cout << "Dynamic cast succeeded! idk: " << d->idk << '\n';
 
-
+    func16();
 }
+
+// template <typename T, int container_size = 1>
+// class Container {
+// public:
+//     std::array<T, container_size> arr {};
+//     T val {};
+//     Container(T t) : val{t} {}
+//     constexpr size_t size() const {
+//         return arr.size();
+//     }
+// };
+//
+// template <>
+// Container<double>::Container(double) : val{696969} {}
+
+template <typename T, int container_size>
+class ContainerBase {
+public:
+        std::array<T, container_size> arr {};
+        T val {};
+        ContainerBase(T t) : val{t} {}
+        constexpr size_t size() const {
+            return arr.size();
+        }
+    };
+
+template <typename T, int container_size>
+class Container: public ContainerBase<T, container_size> {
+public:
+    Container(T t) : ContainerBase<T, container_size>{t} {}
+};
+
+template <int container_size>
+class Container<double, container_size>: public ContainerBase<double, container_size> {
+public:
+    Container(double) : ContainerBase<double, container_size>{696969} {}
+};
+
+
+// template <typename T>
+// void doSomething(T t) {
+//     std::cout << t << '\n';
+// }
+
+template <typename T, int size>
+void doSomething(T& t) {
+    std::cout << t << '\n';
+}
+
+template <int size>
+void doSomething(std::string& t) {
+    std::cout << t << '?' << size << '\n';
+}
+
+// void doSomething(std::string& t) {
+//     std::cout << t << '!' << '\n';
+// }
+
+// template <int container_size>
+// class Container<double, container_size> {
+// public:
+//     std::array<double, container_size> arr {};
+//     double val {};
+//     Container(double) : val{696969} {}
+//     constexpr size_t size() const {
+//         return arr.size();
+//     }
+// };
+
+
+void func16() {
+
+
+    std::cout << Container<int, 1>{1}.val << '\n';
+    std::cout << Container<double, 1>{1.2}.val << '\n';
+    std::cout << Container<std::string, 1>{"Hello"}.val << '\n';
+
+    std::cout << Container<int, 4>{1}.size() << '\n';
+    std::cout << Container<double, 5>{1}.size() << '\n';
+
+    std::string s{"hello"};
+    doSomething<3>(s);
+};
