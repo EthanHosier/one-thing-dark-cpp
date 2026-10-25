@@ -1477,6 +1477,8 @@ public:
     MyException() : std::runtime_error{"My exceptionsnsnnsn"} {}
 };
 
+void func18();
+
 void func17() {
     try {
         try {
@@ -1540,5 +1542,57 @@ void func17() {
     } catch (...) {
         std::cout << "A caught" << '\n';
     }
+
+    func18();
+}
+
+void func19();
+
+void func18() {
+    constexpr int isHungry{0};
+
+    std::bitset<8> bits{};
+    std::cout<< bits << '\n';
+
+    bits.set(3);
+    std::cout<< bits << '\n';
+
+    std::cout<<bits.test(3) << '\n';
+    std::cout<<bits.test(4) << '\n';
+    bits.flip(4);
+    std::cout<<bits.test(4) << '\n';
+    std::cout<< bits << '\n';
+
+    bits.set(isHungry);
+    std::cout<< bits << '\n';
+    std::cout<< bits.count() << '\n';
+
+    std::cout << (bits << 1) << '\n';
+    std::cout << ~bits << '\n';
+    std::cout << (bits | std::bitset<8>{0b100}) << '\n';
+    std::cout << (bits ^ bits) << '\n';
+    bits >>= 3;
+    std::cout<< bits << '\n';
+
+    uint8_t x{1};
+    x |= 0b1000'0000;
+    std::cout << std::bitset<8>(x) << '\n';
+    x |= ~0;
+    std::cout << std::bitset<8>(x) << '\n';
+
+    func19();
+}
+
+void func19() {
+    using Second = std::chrono::duration<double, std::ratio<1> >;
+
+    auto before{std::chrono::steady_clock::now()};
+
+    for (int i{0}; i < 1'000'000; ++i) {
+        ;
+    }
+
+    auto seconds = std::chrono::duration<double>(std::chrono::steady_clock::now() - before);
+    std::cout << "Time passed: " << seconds.count();
 
 }
