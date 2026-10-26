@@ -1583,6 +1583,8 @@ void func18() {
     func19();
 }
 
+void func20();
+
 void func19() {
     using Second = std::chrono::duration<double, std::ratio<1> >;
 
@@ -1595,4 +1597,97 @@ void func19() {
     auto seconds = std::chrono::duration<double>(std::chrono::steady_clock::now() - before);
     std::cout << "Time passed: " << seconds.count();
 
+    func20();
+}
+
+constexpr int getValue(int x)
+{
+    return x;
+}
+
+// This function can be evaluated at runtime
+// When evaluated at compile-time, the function will produce a compilation error
+// because the call to getValue(x) cannot be resolved at compile-time
+constexpr int fooo(int x)
+{
+    if (x < 0) return 0; // needed prior to adoption of P2448R1 in C++23 (see note below)
+    return getValue(x);  // call to non-constexpr function here
+}
+
+class BasicClass {
+public:
+    int x_{};
+    constexpr BasicClass(int x) : x_{x} {
+
+    }
+};
+
+constexpr double calcCircumference(double radius)
+{
+    constexpr double pi { 3.14159265359 };
+    BasicClass b{1};
+    return 2.0 * pi * radius * b.x_;
+}
+
+template <typename T, typename U>
+static constexpr bool passes() {
+    return requires(T a, U b)
+    {
+        {a + b} -> std::same_as<int>;
+    };
+}
+
+template <typename T, typename U>
+concept Passes = passes<T, U>();
+
+template <typename T, typename U>
+requires Passes<T, U>
+T add_(T a, U b) {
+    return a + b;
+}
+
+template <typename T>
+void visitor(const T& value) {
+    std::cout << value << '!' << '\n';
+}
+
+template<typename T>
+void printt(T x) {
+    std::cout << x;
+}
+
+template<typename F>
+void execute(F func) {
+    func(42);
+}
+
+void func20() {
+    constexpr int y { fooo(5) };
+
+    std::cout << add_(1, 2) << '\n';
+    // std::cout << add_(std::string("hello"), std::string("bye")) << '\n';
+
+    std::variant<int, double> value;
+    value = 1.0;
+
+    if (std::holds_alternative<int>(value)) {
+        std::cout << "Int: " << std::get<int>(value) << '\n';
+    }
+
+    if (std::holds_alternative<double>(value)) {
+        std::cout << "Double: " << std::get<double>(value) << '\n';
+    }
+
+    std::visit([](const auto& value) {
+        using T = std::decay_t<decltype(value)>;
+        if constexpr (std::is_same_v<T, int>) {
+           std::cout << "Integer: " << value;
+        } else if constexpr (std::is_same_v<T, double>) {
+           std::cout << "Double: " << value;
+       } else if constexpr (std::is_same_v<T, std::string>) {
+           std::cout << "String: " << value;
+       }
+    }, value);
+
+    execute(printt<int>);
 }
