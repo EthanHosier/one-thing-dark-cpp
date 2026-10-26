@@ -1,11 +1,12 @@
 #include <iostream>
 
 #define PASS
-#define NDEBUG
+// #define NDEBUG
 
 #include <cassert>
 #include <iomanip>
 #include <string_view>
+#include <thread>
 
 #include "Cents.h"
 #include "Employeee.h"
@@ -203,7 +204,7 @@ void func2() {
             std::cout << "default" << '\n';
     }
 
-    assert(false && "hello");
+    // assert(false && "hello");
     constexpr int z = 1;
     static_assert(z == 1);
 
@@ -1653,13 +1654,15 @@ void visitor(const T& value) {
 
 template<typename T>
 void printt(T x) {
-    std::cout << x;
+    std::cout << x << '\n';
 }
 
 template<typename F>
 void execute(F func) {
     func(42);
 }
+
+void func21();
 
 void func20() {
     constexpr int y { fooo(5) };
@@ -1681,13 +1684,42 @@ void func20() {
     std::visit([](const auto& value) {
         using T = std::decay_t<decltype(value)>;
         if constexpr (std::is_same_v<T, int>) {
-           std::cout << "Integer: " << value;
+           std::cout << "Integer: " << value << '\n';
         } else if constexpr (std::is_same_v<T, double>) {
-           std::cout << "Double: " << value;
+           std::cout << "Double: " << value << '\n';
        } else if constexpr (std::is_same_v<T, std::string>) {
-           std::cout << "String: " << value;
+           std::cout << "String: " << value << '\n';
        }
     }, value);
 
     execute(printt<int>);
+
+    func21();
+}
+
+void add_up_to(int limit, int* result)
+{
+    int total { 0 };
+    for (int value { 1 }; value <= limit; ++value)
+        total += value;
+    *result = total;
+}
+
+void func21() {
+    int result {0};
+    try {
+        std::thread worker {add_up_to, 100, &result};
+        std::thread worker2{ std::move(worker)};
+
+        assert(!worker.joinable());
+        assert(worker2.joinable());
+
+        worker2.join();
+        assert(!worker2.joinable());
+
+    } catch (const std::exception& e) {
+        std::cout << "Exception while executing thread: " << e.what() << '\n';
+    }
+
+    std::cout << "Sum: " << result << '\n';
 }
