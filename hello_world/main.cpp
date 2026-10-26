@@ -4,6 +4,7 @@
 // #define NDEBUG
 
 #include <cassert>
+#include <condition_variable>
 #include <iomanip>
 #include <string_view>
 #include <thread>
@@ -1705,6 +1706,8 @@ void add_up_to(int limit, int* result)
     *result = total;
 }
 
+void func22();
+
 void func21() {
     int result {0};
     try {
@@ -1722,4 +1725,106 @@ void func21() {
     }
 
     std::cout << "Sum: " << result << '\n';
+
+    std::unique_ptr<std::vector<int>> values = std::make_unique<std::vector<int>>(std::initializer_list<int>{4,7,10});
+    int total{};
+
+    std::thread worker {
+        [owned = std::move(values), &total] {
+            int subtotal {};
+            for (int value : *owned)
+                subtotal += value;
+            total = subtotal;
+        }
+    };
+
+    assert(!values);
+    worker.join();
+    std::cout << total << '\n';
+
+    func22();
+}
+
+void sum(const std::array<int, 4>& input, int& result)
+{
+    int subtotal {};
+    for (int value : input)
+        subtotal += value;
+    result = subtotal;
+}
+
+void func23();
+
+void func22() {
+    {
+        const std::array<int, 4> input { 3, 6, 9, 12 };
+        int result {};
+        std::thread worker { sum, std::cref(input), std::ref(result) };
+        worker.join();
+        std::cout << result << '\n';
+    }
+
+    int result {};
+    {
+        std::jthread { [&result] {
+            result = 69;
+        }};
+    }
+
+    std::cout << result << '\n';
+    func23();
+}
+
+struct State {
+    bool pending;
+    int input{};
+    int result{};
+    bool processed{};
+    bool finished{};
+    std::mutex mu{};
+    std::condition_variable_any changed{};
+};
+
+constexpr int doSomething(int i) {
+    return i*i;
+}
+
+void func23() {
+    State state;
+
+    {
+        std::jthread worker {[&state](const std::stop_token& stop) {
+            std::unique_lock lock {state.mu};
+
+            for (;;) {
+                const bool ready {state.changed.wait(lock, stop, [&state] {
+                    return state.pending;
+                })};
+
+                if (!ready || stop.stop_requested())
+                    break;
+
+                state.pending = false;
+                state.result = doSomething(state.input);
+                state.processed = true;
+                state.changed.notify_all();
+            }
+
+            state.finished = true;
+        }};
+
+        for (int i = 1; i <= 5; ++i) {
+            std::unique_lock lock {state.mu};
+            state.processed = false;
+            state.input = i;
+            state.pending = true;
+            state.changed.notify_all();
+            state.changed.wait(lock, [&state] {return state.processed; });
+            std::cout << state.result << '\n';
+        }
+    }
+    // const bool first { worker.request_stop() };
+    // assert(first);
+    // worker.join();
+    assert(state.finished);
 }
