@@ -1,0 +1,3 @@
+/Users/ethanhosier/Desktop/cpp/hello_world_2/build/CMakeFiles/hello_world_2.dir
+/Users/ethanhosier/Desktop/cpp/hello_world_2/build/CMakeFiles/edit_cache.dir
+/Users/ethanhosier/Desktop/cpp/hello_world_2/build/CMakeFiles/rebuild_cache.dir

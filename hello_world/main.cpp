@@ -6,6 +6,7 @@
 #include <cassert>
 #include <condition_variable>
 #include <iomanip>
+#include <semaphore>
 #include <string_view>
 #include <thread>
 
@@ -1827,4 +1828,25 @@ void func23() {
     // assert(first);
     // worker.join();
     assert(state.finished);
+
+    {
+        std::mutex mu1{};
+        std::mutex mu2{};
+
+        std::scoped_lock lock{mu1, mu2};
+    }
+
+    {
+        std::binary_semaphore sem{0};
+        std::jthread t1{[&sem] {
+            sem.acquire();
+            std::cout << "Hoh" << '\n';
+        }};
+
+        std::jthread t2{
+            [&sem] {
+                sem.release();
+            }
+        };
+    }
 }
