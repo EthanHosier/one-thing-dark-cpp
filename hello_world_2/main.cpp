@@ -1,29 +1,76 @@
-#include <future>
 #include <iostream>
 #include <latch>
-#include <semaphore>
+#include <thread>
+#include <utility>
+
+template<typename T>
+class UniquePtr {
+public:
+    UniquePtr() noexcept : ptr(nullptr) {
+    }
+
+    explicit UniquePtr(T *ptr) noexcept : ptr(ptr) {
+    }
+
+    ~UniquePtr() { delete ptr; }
+
+    UniquePtr(const UniquePtr &) = delete;
+
+    UniquePtr& operator=(const UniquePtr &) = delete;
+
+    UniquePtr(UniquePtr &&other) noexcept : ptr{other.ptr} {
+        other.ptr = nullptr;
+    }
+
+    UniquePtr& operator=(UniquePtr&& other)  noexcept {
+        if (this != &other) {
+            delete ptr;
+            ptr = other.ptr;
+            other.ptr = nullptr;
+        }
+
+        return *this;
+    }
+
+    T& operator*() const {
+        return *ptr;
+    }
+
+    T* operator->() const {
+        return ptr;
+    }
+
+    T* get() const {
+        return ptr;
+    }
+
+    explicit operator bool() const {
+        return ptr;
+    }
+
+    T* release() {
+        T* temp = ptr;
+        ptr = nullptr;
+        return temp;
+    }
+
+private:
+    T *ptr;
+};
 
 int main() {
-    // std::atomic<int> total{};
-    // std::atomic<bool> done{};
-    //
-    //
-    // auto _ = std::jthread([&total, &done]() {
-    //     for (int i{0}; i < 1000; ++i) {
-    //         total.fetch_add(1, std::memory_order_relaxed);
-    //     }
-    //
-    //     done.store(true, std::memory_order_release);
-    // });
-    //
-    // bool expected{true};
-    // while (!done.compare_exchange_weak(expected, false, std::memory_order_acquire, std::memory_order_relaxed)) {
-    //     expected = true;
-    //     std::this_thread::yield();
-    // };
-    // std::cout << total.load(std::memory_order_relaxed) << std::endl;
+    UniquePtr u {new int};
+    *u = 4;
+    std::cout << *u << std::endl;
+    std::cout << static_cast<bool>(u) << std::endl;
+    std::latch latch{1};
 
-    std::string* s = new std::string{"hello"};
+    std::jthread j{[uu = std::move(u), &latch] {
+        std::cout << *uu << std::endl;
+        std::cout << static_cast<bool>(uu) << std::endl;
+        latch.count_down();
+    }};
 
-    std::cout << *s << std::endl;
+    latch.wait();
+    std::cout << static_cast<bool>(u) << std::endl;
 }

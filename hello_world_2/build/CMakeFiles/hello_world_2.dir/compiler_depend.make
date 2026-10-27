@@ -753,7 +753,6 @@ CMakeFiles/hello_world_2.dir/main.cpp.o: /Users/ethanhosier/Desktop/cpp/hello_wo
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__thread/poll_with_backoff.h \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__thread/support.h \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__thread/support/pthread.h \
-  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__thread/this_thread.h \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__thread/thread.h \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__thread/timed_backoff_policy.h \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__tuple/find_index.h \
@@ -944,7 +943,6 @@ CMakeFiles/hello_world_2.dir/main.cpp.o: /Users/ethanhosier/Desktop/cpp/hello_wo
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/exception \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/format \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/functional \
-  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/future \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/initializer_list \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/ios \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/iosfwd \
@@ -963,7 +961,6 @@ CMakeFiles/hello_world_2.dir/main.cpp.o: /Users/ethanhosier/Desktop/cpp/hello_wo
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/print \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/queue \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/ratio \
-  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/semaphore \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/sstream \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/stack \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/stddef.h \
@@ -975,7 +972,6 @@ CMakeFiles/hello_world_2.dir/main.cpp.o: /Users/ethanhosier/Desktop/cpp/hello_wo
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/string.h \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/string_view \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/system_error \
-  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/thread \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/tuple \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/type_traits \
   /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/typeinfo \
@@ -1178,8 +1174,6 @@ CMakeFiles/hello_world_2.dir/main.cpp.o: /Users/ethanhosier/Desktop/cpp/hello_wo
 
 /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__type_traits/remove_pointer.h:
 
-/opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/thread:
-
 /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__type_traits/remove_cvref.h:
 
 /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__type_traits/remove_all_extents.h:
@@ -1269,8 +1263,6 @@ CMakeFiles/hello_world_2.dir/main.cpp.o: /Users/ethanhosier/Desktop/cpp/hello_wo
 /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__type_traits/is_constant_evaluated.h:
 
 /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__type_traits/is_class.h:
-
-/opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__type_traits/is_char_like_type.h:
 
 /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__type_traits/is_base_of.h:
 
@@ -2048,8 +2040,6 @@ CMakeFiles/hello_world_2.dir/main.cpp.o: /Users/ethanhosier/Desktop/cpp/hello_wo
 
 /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__algorithm/stable_sort.h:
 
-/opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/future:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/usr/include/sys/_types/_ptrdiff_t.h:
 
 /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__iterator/indirectly_comparable.h:
@@ -2388,8 +2378,6 @@ CMakeFiles/hello_world_2.dir/main.cpp.o: /Users/ethanhosier/Desktop/cpp/hello_wo
 
 /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__algorithm/ranges_adjacent_find.h:
 
-/opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__thread/this_thread.h:
-
 /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__algorithm/ranges_partition.h:
 
 /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__algorithm/in_fun_result.h:
@@ -2451,8 +2439,6 @@ CMakeFiles/hello_world_2.dir/main.cpp.o: /Users/ethanhosier/Desktop/cpp/hello_wo
 /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__configuration/platform.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/usr/include/stdio.h:
-
-/opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/semaphore:
 
 /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__type_traits/conjunction.h:
 
@@ -2747,6 +2733,8 @@ CMakeFiles/hello_world_2.dir/main.cpp.o: /Users/ethanhosier/Desktop/cpp/hello_wo
 /Library/Developer/CommandLineTools/SDKs/MacOSX26.sdk/usr/include/_types/_uintmax_t.h:
 
 /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__algorithm/ranges_remove_copy.h:
+
+/opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__type_traits/is_char_like_type.h:
 
 /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__algorithm/ranges_min_element.h:
 

@@ -754,7 +754,6 @@ CMakeFiles/hello_world_2.dir/main.cpp.o
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__thread/poll_with_backoff.h
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__thread/support.h
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__thread/support/pthread.h
- /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__thread/this_thread.h
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__thread/thread.h
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__thread/timed_backoff_policy.h
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/__tuple/find_index.h
@@ -945,7 +944,6 @@ CMakeFiles/hello_world_2.dir/main.cpp.o
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/exception
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/format
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/functional
- /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/future
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/initializer_list
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/ios
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/iosfwd
@@ -964,7 +962,6 @@ CMakeFiles/hello_world_2.dir/main.cpp.o
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/print
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/queue
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/ratio
- /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/semaphore
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/sstream
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/stack
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/stddef.h
@@ -976,7 +973,6 @@ CMakeFiles/hello_world_2.dir/main.cpp.o
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/string.h
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/string_view
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/system_error
- /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/thread
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/tuple
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/type_traits
  /opt/homebrew/Cellar/llvm/22.1.4/include/c++/v1/typeinfo
