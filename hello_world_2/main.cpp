@@ -47,15 +47,24 @@ public:
         copy(other);
     };
 
-    Vector operator=(const Vector& other) {
+    Vector& operator=(const Vector& other) {
         if (&other != this) {
             copy(other);
         }
+        return *this;
     }
 
-    Vector(Vector&& other) : size_{other.size_}, capacity_{other.capacity_}, arr_{std::move(other.arr_)} {
-        other.size_ = 0;
+    Vector(Vector&& other) {
+        move(other);
     }
+
+    Vector& operator=(Vector&& other) {
+        if (&other != this) {
+            move(other);
+        }
+        return *this;
+    }
+
 
     T& operator[](size_t i) const{
         return arr_[i].value();
@@ -109,6 +118,14 @@ private:
             std::copy(other.arr_.get(), other.arr_.get() + size_, arr_.get());
         }
     }
+
+    void move(Vector &other) {
+        size_ = other.size_;
+        capacity_ = other.capacity_;
+        arr_ = std::move(other.arr_);
+        other.size_ = 0;
+    }
+
 };
 
 template <typename T, typename U>
@@ -166,8 +183,8 @@ int main() {
     assert(stdVec2.size() == myVec2.size());
     std::cout << stdVec2.size() << std::endl;
 
-    myVec2 = myVec3;
-    assert(str(myVec2) == str(myVec));
+    myVec2 = std::move(myVec3);
+    assert(myVec3.size() == 0);
 
     return 0;
 }
