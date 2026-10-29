@@ -1,76 +1,82 @@
+#include <assert.h>
 #include <iostream>
-#include <latch>
-#include <thread>
-#include <utility>
+#include <sstream>
 
-template<typename T>
-class UniquePtr {
-public:
-    UniquePtr() noexcept : ptr(nullptr) {
-    }
+template <typename T>
+std::string str(const T& vec) {
+    std::ostringstream os{};
+    os << '[';
 
-    explicit UniquePtr(T *ptr) noexcept : ptr(ptr) {
-    }
-
-    ~UniquePtr() { delete ptr; }
-
-    UniquePtr(const UniquePtr &) = delete;
-
-    UniquePtr& operator=(const UniquePtr &) = delete;
-
-    UniquePtr(UniquePtr &&other) noexcept : ptr{other.ptr} {
-        other.ptr = nullptr;
-    }
-
-    UniquePtr& operator=(UniquePtr&& other)  noexcept {
-        if (this != &other) {
-            delete ptr;
-            ptr = other.ptr;
-            other.ptr = nullptr;
+    for (size_t i = 0; i < vec.size(); ++i) {
+        os << vec[i];
+        if (i < vec.size() - 1) {
+            os << ',';
         }
-
-        return *this;
     }
+    os << ']';
+    return os.str();
+}
 
-    T& operator*() const {
-        return *ptr;
-    }
+inline constexpr char StdVec[] = "StdVec";
+inline constexpr char MyVec[] = "MyVec";
 
-    T* operator->() const {
-        return ptr;
-    }
+template <typename T, auto& Name>
+class Container {
+public:
+    Container(T val) : val_{val} {}
+    // ~Container() {
+    //     std::cout << Name << ": Destroying " << val_ << std::endl;
+    // }
 
-    T* get() const {
-        return ptr;
-    }
-
-    explicit operator bool() const {
-        return ptr;
-    }
-
-    T* release() {
-        T* temp = ptr;
-        ptr = nullptr;
-        return temp;
+    friend std::ostream& operator<<(std::ostream& os, const Container& c) {
+        return os << c.val_;
     }
 
 private:
-    T *ptr;
+    T val_;
 };
 
-int main() {
-    UniquePtr u {new int};
-    *u = 4;
-    std::cout << *u << std::endl;
-    std::cout << static_cast<bool>(u) << std::endl;
-    std::latch latch{1};
+template <typename T>
+class Vector {
+public:
+    Vector(std::initializer_list<T> init_list) : size_{init_list.size()}, arr_{new std::optional<T>[init_list.size()]} {
+        std::copy(init_list.begin(), init_list.end(), arr_.get());
+    }
 
-    std::jthread j{[uu = std::move(u), &latch] {
-        std::cout << *uu << std::endl;
-        std::cout << static_cast<bool>(uu) << std::endl;
-        latch.count_down();
+    T& operator[](size_t i) const{
+        return arr_[i].value();
+    }
+
+    void pop_back() {
+        --size_;
+        arr_[size_].reset();
+    }
+
+    size_t size() const noexcept {
+        return size_;
+    }
+
+private:
+    std::unique_ptr<std::optional<T>[]> arr_;
+    size_t size_;
+};
+
+
+int main() {
+    std::vector<Container<int, StdVec>> stdVec {1,2,3} ;
+    Vector<Container<int, MyVec>> myVec {1,2,3};
+
+    auto assertSame{[&stdVec, &myVec] {
+        assert(str(myVec) == str(stdVec));
+        std::cout << "MyVec:   " << str(myVec) << std::endl;
+        std::cout << "stdVec:  " << str(stdVec) << std::endl;
     }};
 
-    latch.wait();
-    std::cout << static_cast<bool>(u) << std::endl;
+    assertSame();
+
+    stdVec.pop_back();
+    myVec.pop_back();
+    assertSame();
+
+    return 0;
 }
