@@ -53,14 +53,15 @@ public:
     }
 
     void push_back(const T& t) {
-        if (size_ == capacity_) {
-            std::unique_ptr new_arr{std::make_unique<std::optional<T>[]>(size_ * 2)};
-            std::copy(arr_.get(), arr_.get() + size_, new_arr.get());
-            arr_ = std::move(new_arr);
-            capacity_ *= 2;
-        }
-
+        maybe_grow();
         arr_[size_] = t;
+        ++size_;
+    }
+
+    template <typename... Args>
+    void emplace_back(Args&& ... args) {
+        maybe_grow();
+        new (arr_.get() + size_) std::optional {std::forward<T>(args...)};
         ++size_;
     }
 
@@ -72,6 +73,15 @@ private:
     std::unique_ptr<std::optional<T>[]> arr_;
     size_t size_;
     size_t capacity_;
+
+    void maybe_grow() {
+        if (size_ == capacity_) {
+            std::unique_ptr new_arr{std::make_unique<std::optional<T>[]>(size_ * 2)};
+            std::copy(arr_.get(), arr_.get() + size_, new_arr.get());
+            arr_ = std::move(new_arr);
+            capacity_ *= 2;
+        }
+    }
 };
 
 
@@ -95,6 +105,15 @@ int main() {
     stdVec.push_back(4);
     myVec.push_back(4);
     assertSame();
+
+    stdVec[2] = 64;
+    myVec[2] = 64;
+    assertSame();
+
+    stdVec.emplace_back(6);
+    myVec.emplace_back(6);
+    assertSame();
+    assert(stdVec.size() == myVec.size());
 
     return 0;
 }
