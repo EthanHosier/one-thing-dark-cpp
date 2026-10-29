@@ -3,9 +3,7 @@ project(hello_world_2)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(hello_world_2 main.cpp
-        vector.cpp
-        vector.h)
+add_executable(hello_world_2 main.cpp)
 
 #target_compile_options(hello_world_2 PRIVATE -fsanitize=thread)
 #target_link_options(hello_world_2 PRIVATE -fsanitize=thread)
