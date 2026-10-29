@@ -66,7 +66,11 @@ public:
     }
 
 
-    T& operator[](size_t i) const{
+    const T& operator[](size_t i) const{
+        return arr_[i].value();
+    }
+
+    T& operator[](size_t i) {
         return arr_[i].value();
     }
 
@@ -84,7 +88,7 @@ public:
     template <typename... Args>
     void emplace_back(Args&& ... args) {
         maybe_grow();
-        new (arr_.get() + size_) std::optional {std::forward<T>(args...)};
+        new (arr_.get() + size_) std::optional {std::forward<Args>(args)...};
         ++size_;
     }
 
@@ -105,11 +109,11 @@ public:
             return *this;
         }
 
-        bool operator!=(VectorIterator& other) const {
-            return other.index_ != index_;
+        bool operator!=(const VectorIterator& other) const {
+            return other.index_ != index_ && &vector_ == &other.vector_;
         }
 
-        T& operator*() {
+        const T& operator*() const {
             return vector_[index_];
         }
 
@@ -145,10 +149,10 @@ private:
 
     void maybe_grow() {
         if (size_ == capacity_) {
-            std::unique_ptr new_arr{std::make_unique<std::optional<T>[]>(size_ * 2)};
+            capacity_= size_ == 0 ? 1 : size_ * 2;
+            std::unique_ptr new_arr{std::make_unique<std::optional<T>[]>(capacity_)};
             std::copy(arr_.get(), arr_.get() + size_, new_arr.get());
             arr_ = std::move(new_arr);
-            capacity_ *= 2;
         }
     }
 
