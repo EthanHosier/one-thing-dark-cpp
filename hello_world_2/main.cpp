@@ -96,6 +96,14 @@ public:
         return capacity_;
     }
 
+    std::optional<T>* begin() const noexcept {
+        return arr_.get();
+    }
+
+    std::optional<T>* end() const noexcept {
+        return arr_.get() + size_;
+    }
+
 private:
     std::unique_ptr<std::optional<T>[]> arr_;
     size_t size_;
@@ -185,6 +193,11 @@ int main() {
 
     myVec2 = std::move(myVec3);
     assert(myVec3.size() == 0);
+
+    std::cout << str(myVec2) << std::endl;
+    for (auto& i : myVec2) {
+        std::cout << i.value() << std::endl;
+    }
 
     return 0;
 }
