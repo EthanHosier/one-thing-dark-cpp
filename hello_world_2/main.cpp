@@ -96,12 +96,46 @@ public:
         return capacity_;
     }
 
-    std::optional<T>* begin() const noexcept {
-        return arr_.get();
+    class VectorIterator {
+    public:
+        VectorIterator(const Vector& vec, size_t index) : vector_{vec}, index_{index} {}
+
+        VectorIterator& operator++() {
+            index_ += 1;
+            return *this;
+        }
+
+        bool operator!=(VectorIterator& other) const {
+            return other.index_ != index_;
+        }
+
+        T& operator*() {
+            return vector_[index_];
+        }
+
+    private:
+        size_t index_;
+        const Vector& vector_;
+    };
+
+    // std::optional<T>* begin() const noexcept {
+    //     return arr_.get();
+    // }
+    //
+    // std::optional<T>* end() const noexcept {
+    //     return arr_.get() + size_;
+    // }
+
+    VectorIterator begin() const noexcept {
+        return VectorIterator{*this, 0};
     }
 
-    std::optional<T>* end() const noexcept {
-        return arr_.get() + size_;
+    VectorIterator end() const noexcept {
+        if (arr_ == nullptr) {
+            return begin();
+        }
+
+        return VectorIterator(*this, size_);
     }
 
 private:
@@ -196,7 +230,7 @@ int main() {
 
     std::cout << str(myVec2) << std::endl;
     for (auto& i : myVec2) {
-        std::cout << i.value() << std::endl;
+        std::cout << i << std::endl;
     }
 
     return 0;
