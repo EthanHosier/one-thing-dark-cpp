@@ -43,6 +43,16 @@ public:
         std::copy(init_list.begin(), init_list.end(), arr_.get());
     }
 
+    Vector(const Vector& other) : size_{other.size_}, capacity_{other.capacity_}, arr_{std::make_unique<std::optional<T>[]>(other.capacity_)} {
+        if (other.arr_.get() != nullptr) {
+            std::copy(other.arr_.get(), other.arr_.get() + size_, arr_.get());
+        }
+    };
+
+    Vector(Vector&& other) : size_{other.size_}, capacity_{other.capacity_}, arr_{std::move(other.arr_)} {
+        other.size_ = 0;
+    }
+
     T& operator[](size_t i) const{
         return arr_[i].value();
     }
@@ -69,6 +79,10 @@ public:
         return size_;
     }
 
+    size_t capacity() const noexcept {
+        return capacity_;
+    }
+
 private:
     std::unique_ptr<std::optional<T>[]> arr_;
     size_t size_;
@@ -84,36 +98,60 @@ private:
     }
 };
 
+template <typename T, typename U>
+void assertSame(T& stdVec, U& myVec) {
+    std::cout << "MyVec:   " << str(myVec) << std::endl;
+    std::cout << "stdVec:  " << str(stdVec) << std::endl;
+    assert(str(myVec) == str(stdVec));
+    std::cout << '\n' << std::endl;
+};
 
 int main() {
     std::vector<Container<int, StdVec>> stdVec {1,2,3} ;
     Vector<Container<int, MyVec>> myVec {1,2,3};
 
-    auto assertSame{[&stdVec, &myVec] {
-        std::cout << "MyVec:   " << str(myVec) << std::endl;
-        std::cout << "stdVec:  " << str(stdVec) << std::endl;
-        assert(str(myVec) == str(stdVec));
-        std::cout << '\n' << std::endl;
-    }};
+    {
+        auto assertSame{[&stdVec, &myVec] {
+            std::cout << "MyVec:   " << str(myVec) << std::endl;
+            std::cout << "stdVec:  " << str(stdVec) << std::endl;
+            assert(str(myVec) == str(stdVec));
+            std::cout << '\n' << std::endl;
+        }};
 
-    assertSame();
+        assertSame();
 
-    stdVec.pop_back();
-    myVec.pop_back();
-    assertSame();
+        stdVec.pop_back();
+        myVec.pop_back();
+        assertSame();
 
-    stdVec.push_back(4);
-    myVec.push_back(4);
-    assertSame();
+        stdVec.push_back(4);
+        myVec.push_back(4);
+        assertSame();
 
-    stdVec[2] = 64;
-    myVec[2] = 64;
-    assertSame();
+        stdVec[2] = 64;
+        myVec[2] = 64;
+        assertSame();
 
-    stdVec.emplace_back(6);
-    myVec.emplace_back(6);
-    assertSame();
-    assert(stdVec.size() == myVec.size());
+        stdVec.emplace_back(6);
+        myVec.emplace_back(6);
+        assertSame();
+        assert(stdVec.size() == myVec.size());
+    }
+
+
+    std::vector stdVec2 = stdVec;
+    Vector myVec2 = myVec;
+
+    assertSame(stdVec, myVec);
+    assertSame(stdVec2, myVec2);
+
+    std::vector stdVec3 = std::move(stdVec2);
+    Vector myVec3 = std::move(myVec2);
+    assertSame(stdVec3, myVec3);
+
+    assert(stdVec3.size() == myVec3.size());
+    assert(stdVec2.size() == myVec2.size());
+    std::cout << stdVec2.size() << std::endl;
 
     return 0;
 }
