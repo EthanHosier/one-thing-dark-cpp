@@ -43,11 +43,15 @@ public:
         std::copy(init_list.begin(), init_list.end(), arr_.get());
     }
 
-    Vector(const Vector& other) : size_{other.size_}, capacity_{other.capacity_}, arr_{std::make_unique<std::optional<T>[]>(other.capacity_)} {
-        if (other.arr_.get() != nullptr) {
-            std::copy(other.arr_.get(), other.arr_.get() + size_, arr_.get());
-        }
+    Vector(const Vector& other) {
+        copy(other);
     };
+
+    Vector operator=(const Vector& other) {
+        if (&other != this) {
+            copy(other);
+        }
+    }
 
     Vector(Vector&& other) : size_{other.size_}, capacity_{other.capacity_}, arr_{std::move(other.arr_)} {
         other.size_ = 0;
@@ -94,6 +98,15 @@ private:
             std::copy(arr_.get(), arr_.get() + size_, new_arr.get());
             arr_ = std::move(new_arr);
             capacity_ *= 2;
+        }
+    }
+
+    void copy(const Vector &other) {
+        size_ = other.size_;
+        capacity_ = other.capacity_;
+        arr_ = std::make_unique<std::optional<T>[]>(other.capacity_);
+        if (other.arr_.get() != nullptr) {
+            std::copy(other.arr_.get(), other.arr_.get() + size_, arr_.get());
         }
     }
 };
@@ -152,6 +165,9 @@ int main() {
     assert(stdVec3.size() == myVec3.size());
     assert(stdVec2.size() == myVec2.size());
     std::cout << stdVec2.size() << std::endl;
+
+    myVec2 = myVec3;
+    assert(str(myVec2) == str(myVec));
 
     return 0;
 }
