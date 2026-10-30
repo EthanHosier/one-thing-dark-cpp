@@ -100,27 +100,38 @@ private:
 
 
 int main() {
-    constexpr int iter_size{2000};
-    Channel<100, int> channel;
-    std::jthread producer {
-        [&channel] {
-            for (int i = 0; i < iter_size; i++) {
-                for (;!channel.maybe_enqueue(std::move(i));) {};
-                std::cout << "Enqueued " << i << std::endl;
-            }
-        }
-    };
+    constexpr int num_threads = 5;
+    constexpr int iter_size{2000 / num_threads};
 
-    std::jthread consumer {
-        [&channel] {
+    Channel<100, int> channel;
+
+    std::vector<std::jthread> threads;
+    threads.reserve(num_threads * 2);
+
+    for (int j = 0; j < num_threads; j ++) {
+        threads.emplace_back(
+            [&channel, j] {
+                for (int i = 0; i < iter_size; i++) {
+                    for (;!channel.maybe_enqueue(std::move(i));) {};
+                    std::cout << "Thread " << j << ": Enqueued " << i << std::endl;
+                }
+            }
+        );
+    }
+
+    for (int j = 0; j < num_threads; j ++) {
+        threads.emplace_back(
+        [&channel, j] {
             for (int i = 0; i < iter_size; i++) {
                 std::optional<int> x;
                 for (;!x.has_value(); x = channel.maybe_dequeue()) {}
-                std::cout << "Consumed " << x.value() << std::endl;
+                std::cout << "Thread " << j << ": Consumed " << x.value() << std::endl;
             }
         }
-    };
+    );
+    }
 
-    producer.join();
-    consumer.join();
+   for (auto& t: threads) {
+       t.join();
+   };
 }
