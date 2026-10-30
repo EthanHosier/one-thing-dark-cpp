@@ -31,7 +31,7 @@ public:
                 return false;
             }
 
-            ValueWrapper desired_value{ValueWrapper{false, std::move(val)}};
+            ValueWrapper desired_value{ValueWrapper{true, std::move(val)}};
             if (!arr_[current_channel_state.writer_index_].compare_exchange_weak(current_value, desired_value)) {
                 continue;
             }
@@ -49,13 +49,47 @@ public:
         }
     }
 
+    std::optional<T> maybe_dequeue() {
+        for (;;) {
+            ChannelState current_channel_state = state_.load();
+            if (is_empty_(current_channel_state)) {
+                return {};
+            }
+
+            ValueWrapper current_value = arr_[current_channel_state.reader_index_].load();
+            if (!current_value.contains_value) {
+                return {};
+            }
+
+            ValueWrapper desired_value{ValueWrapper{false, T{}}};
+            if (!arr_[current_channel_state.reader_index_].compare_exchange_weak(current_value, desired_value)) {
+                continue;
+            }
+
+            for (;;) {
+                ChannelState desired_channel_state = {
+                    .writer_index_ = current_channel_state.writer_index_,
+                    .reader_index_ = inc_index(current_channel_state.reader_index_)
+                };
+
+                if (state_.compare_exchange_weak(current_channel_state, desired_channel_state)) {
+                    return {current_value.value};
+                }
+            }
+        }
+    }
+
 private:
     constexpr static int AllocSize = Size + 1;
     std::array<std::atomic<ValueWrapper<T>>, AllocSize> arr_{};
     std::atomic<ChannelState> state_{};
 
     constexpr bool is_full_(ChannelState &channel_state) const {
-        return ((channel_state.reader_index_ - channel_state.writer_index_ + AllocSize) % AllocSize == 1) ;
+        return Size == 0 || ((channel_state.reader_index_ - channel_state.writer_index_ + AllocSize) % AllocSize == 1);
+    }
+
+    constexpr bool is_empty_(ChannelState &channel_state) const {
+        return channel_state.writer_index_ == channel_state.reader_index_;
     }
 
     constexpr int inc_index(const int i) const {
@@ -65,14 +99,6 @@ private:
 
 
 int main() {
-    Channel<5, int> channel;
-    std::cout << channel.maybe_enqueue(3) << std::endl;
-    std::cout << channel.maybe_enqueue(3) << std::endl;
-    std::cout << channel.maybe_enqueue(3) << std::endl;
-    std::cout << channel.maybe_enqueue(3) << std::endl;
-    std::cout << channel.maybe_enqueue(3) << std::endl;
-    std::cout << channel.maybe_enqueue(3) << std::endl;
-    std::cout << channel.maybe_enqueue(3) << std::endl;
-    std::cout << channel.maybe_enqueue(3) << std::endl;
+
 
 }
