@@ -22,18 +22,18 @@ public:
 
     bool maybe_enqueue(T &&val) {
         for (;;) {
-            ChannelState current_channel_state = state_.load();
+            ChannelState current_channel_state = state_.load(std::memory_order::acquire);
             if (is_full_(current_channel_state)) {
                 return false;
             }
 
-            ValueWrapper current_value = arr_[current_channel_state.writer_index_].load();
+            ValueWrapper current_value = arr_[current_channel_state.writer_index_].load(std::memory_order::acquire);
             if (current_value.contains_value) {
                 return false;
             }
 
             ValueWrapper desired_value{ValueWrapper{true, std::move(val)}};
-            if (!arr_[current_channel_state.writer_index_].compare_exchange_weak(current_value, desired_value)) {
+            if (!arr_[current_channel_state.writer_index_].compare_exchange_weak(current_value, desired_value, std::memory_order::acq_rel, std::memory_order::relaxed)) {
                 continue;
             }
 
@@ -43,7 +43,7 @@ public:
                     .reader_index_ = current_channel_state.reader_index_
                 };
 
-                if (state_.compare_exchange_weak(current_channel_state, desired_channel_state)) {
+                if (state_.compare_exchange_weak(current_channel_state, desired_channel_state, std::memory_order::acq_rel, std::memory_order::relaxed)) {
                     return true;
                 }
             }
@@ -52,18 +52,18 @@ public:
 
     std::optional<T> maybe_dequeue() {
         for (;;) {
-            ChannelState current_channel_state = state_.load();
+            ChannelState current_channel_state = state_.load(std::memory_order::acquire);
             if (is_empty_(current_channel_state)) {
                 return {};
             }
 
-            ValueWrapper current_value = arr_[current_channel_state.reader_index_].load();
+            ValueWrapper current_value = arr_[current_channel_state.reader_index_].load(std::memory_order::acquire);
             if (!current_value.contains_value) {
                 return {};
             }
 
             ValueWrapper desired_value{ValueWrapper{false, T{}}};
-            if (!arr_[current_channel_state.reader_index_].compare_exchange_weak(current_value, desired_value)) {
+            if (!arr_[current_channel_state.reader_index_].compare_exchange_weak(current_value, desired_value, std::memory_order::acq_rel, std::memory_order::relaxed)) {
                 continue;
             }
 
@@ -73,7 +73,7 @@ public:
                     .reader_index_ = inc_index(current_channel_state.reader_index_)
                 };
 
-                if (state_.compare_exchange_weak(current_channel_state, desired_channel_state)) {
+                if (state_.compare_exchange_weak(current_channel_state, desired_channel_state, std::memory_order::acq_rel, std::memory_order::relaxed)) {
                     return {current_value.value};
                 }
             }
