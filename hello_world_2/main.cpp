@@ -1,4 +1,5 @@
 #include <iostream>
+#include <__thread/jthread.h>
 
 template<typename T>
 struct ValueWrapper {
@@ -89,7 +90,7 @@ private:
     }
 
     constexpr bool is_empty_(ChannelState &channel_state) const {
-        return channel_state.writer_index_ == channel_state.reader_index_;
+        return Size == 0 || channel_state.writer_index_ == channel_state.reader_index_;
     }
 
     constexpr int inc_index(const int i) const {
@@ -99,6 +100,27 @@ private:
 
 
 int main() {
+    constexpr int iter_size{2000};
+    Channel<100, int> channel;
+    std::jthread producer {
+        [&channel] {
+            for (int i = 0; i < iter_size; i++) {
+                for (;!channel.maybe_enqueue(std::move(i));) {};
+                std::cout << "Enqueued " << i << std::endl;
+            }
+        }
+    };
 
+    std::jthread consumer {
+        [&channel] {
+            for (int i = 0; i < iter_size; i++) {
+                std::optional<int> x;
+                for (;!x.has_value(); x = channel.maybe_dequeue()) {}
+                std::cout << "Consumed " << x.value() << std::endl;
+            }
+        }
+    };
 
+    producer.join();
+    consumer.join();
 }
